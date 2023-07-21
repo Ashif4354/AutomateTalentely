@@ -36,7 +36,13 @@ data = {
     'Data Interpretation' : '//*[@id="main-content"]/div/div[2]/div[3]/div[33]/div/div[3]/a',
         
 }
+
+new_dict = {}
+for key in data.keys():
+    key2 = key.lower()
+    new_dict[key2] = data[key]
+
 #//*[@id="main-content"]/div/div[2]/div[3]/div[33]/div/div[3]/a
 
 with open('Qtests.json', 'w') as json_file:
-  json.dump(data, json_file)
+  json.dump(new_dict, json_file)

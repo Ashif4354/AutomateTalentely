@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 
+from tests import tests
 
 class Talentely:
     def __init__(self, email, password = 'vidhai'):
@@ -10,6 +11,7 @@ class Talentely:
         self.browser  = None
         self.email = email
         self.password = password
+        self.tests = tests
         
 
     '''
@@ -34,39 +36,25 @@ class Talentely:
         sleep(.5)
         password_field.send_keys(Keys.ENTER)
 
-        sleep(5)
-        #A Q jss2329 (2, 3, 4)
-        a = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/button')
-        a.click()
-
-        sleep(3)
- 
-        a = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a')
-        a.click()
-
-        sleep(3)
- 
-        a = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a')
-        a.click()
+        #sleep(5)
         
-        sleep(3)
-
-        a = self.browser.find_element(By.ID, 'stepper1')
-        a.click()
-
-        sleep(3)
- 
-        a = self.browser.find_element(By.XPATH, '/html/body')
-        a.click()
-
-        sleep(3)
- 
-        a = self.browser.find_element(By.XPATH, '//*[@id="height0"]/div/div/div/button/span[1]')
-        a.click()
-
         sleep(50)
 
 
+    def perform_test(self, test):
+        
+        pass
+
+
+
+
+
+
+    def perform_tests(self):
+        
+        for test in self.tests:
+            self.perform_test(test)
+        
         
         
 
