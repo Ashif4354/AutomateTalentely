@@ -1,0 +1,4 @@
+# Install python version 3.7 or later
+# OPEN CMD and run 'pip install selenium' and 'pip install requests'
+# run main.py 
+# Thats it
