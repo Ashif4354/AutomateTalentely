@@ -41,14 +41,21 @@ class logger:
         
         description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
         self.discord.send_embed(title = 'Test Finished', description = description, url = 2) 
-            
+    
+    def log_test_error(self):
+        with open('tests.log', 'a') as file:
+            file.write(f'TEST ERROR : Ended at {self.get_time()}' + '\n\n')  
+
+        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
+        self.discord.send_embed(title = 'TEST ERROR', description = description, url = 2)      
 
 class discord:
     def __init__(self, email):
         self.email = email
         self.url1 = 'https://discord.com/api/webhooks/1132211379923853322/IbcrftADhJrMmJL-Y_lha1FXc0edPd-HpxXPjBOVwJ4iDWj4joz0dh-b6cc_J-yNzMYg'
         self.url2 = 'https://discord.com/api/webhooks/1132233451567857694/LGnPeaWId7Xa-1NxL70bCDzB-wW6FbDvw7LCTI76m5nMvBUXLUhYBBy7SdLg9Q8kAJGO'
-
+        self.url3 = 'https://discord.com/api/webhooks/1132319132591870093/hluEIC2DkCz968qli82utVnMhm6WfrMzU5dwzHQMmQW9aR4X2Pf0OYmUooiSvvhi6h0x'
+        
         self.headers = {
             'Content-Type': 'application/json'
         }
@@ -73,4 +80,8 @@ class discord:
             url = self.url2
 
         post(url, headers = self.headers, json = self.data)
+    
 
+
+if __name__ == '__main__':
+    discord('20cs008@kcgcollege.com').send_log_file()
