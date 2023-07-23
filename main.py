@@ -278,7 +278,7 @@ def main():
         with open('TestStatus.json', 'w') as json_file:
             json.dump(test_status, json_file)
 
-    option = input("\n1. Start / Resume test\n2. Reset test completion status\n3. Change user (test completion status will be reset)\n\nYOUR OPTION : ")
+    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n\nYOUR OPTION : ")
     
     if option == '1':
         with open('Student.json', 'r') as file:
