@@ -18,6 +18,7 @@ class Talentely:
         self.incomplete_tests = None
         self.ERROR_tests = None
         self.logger = logger(self.email)
+        self.coding_tests = ('c', )
         
     def open_browser(self):
         self.browser = webdriver.Edge()
@@ -98,6 +99,7 @@ class Talentely:
                 pass
         except Exception as exception:
             print('\nSOME ERROR OCCURED', exception)
+            input("WAIT")
     
     def navigate_aptitude(self, test):
         if test[1] == 'q':
@@ -169,7 +171,6 @@ class Talentely:
         elif total_time == 0 and test[0] == 'a':
             total_time = 1200
         
-        total_time -= 30
         return (total_time, test_time)
 
     def find_and_do_test(self, test):
@@ -216,9 +217,13 @@ class Talentely:
 
         try:
             end_test_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]')
+
+            self.do_test(test, test_time)
+
             self.end_test(test, end_test_button, test_time[0])
 
         except Exception as exception:
+            print(exception)
             self.end_test2(test)       
         
     
@@ -227,9 +232,86 @@ class Talentely:
         self.logger.log_start_test(test_name, test_time)
 
         sleep(5)
-    
+
+    def get_number_of_questions(self):
+        number = 1
+        questions = 0
+
+        three_line_button = self.browser.find_element(By.XPATH, '//*[@id="drawer-container"]/div[1]/button')
+        three_line_button.click()
+
+        while True:
+            try:
+                self.browser.find_element(By.XPATH, f'//*[@id="drawer-container"]/div[2]/div/div[1]/div[2]/div[{number}]/button')
+                #print(number)
+            except:
+                questions = number - 1
+                break
+            number += 1
+
+        return questions
+
+    def do_test(self, test, test_time):
+        no_of_questions = self.get_number_of_questions()
+         
+        #print(no_of_questions)
+        
+        if test[0] not in self.coding_tests:
+            time_for_each_question = test_time[0] / no_of_questions - 6
+            #print(time_for_each_question)
+            self.choose_options(no_of_questions, time_for_each_question)
+        else:
+            time_for_each_question = test_time[0] / no_of_questions - 15 #should change the -15 if type code is given
+            self.type_codes(no_of_questions, time_for_each_question)
+
+    def choose_options(self, no_of_questions, time_for_each_question):
+
+        for question in range(1, no_of_questions + 1):
+            option_number = question % 4
+            if option_number == 0:
+                option_number = 4
+
+            xpaths = [
+                f'//*[@id="drawer-container"]/div/div/div[1]/div[1]/div[3]/fieldset/div/label[{option_number}]/span[1]/span[1]/input',
+                f'//*[@id="drawer-container"]/div[1]/div/div[1]/div[1]/div[3]/fieldset/div/label[{option_number}]/span[1]/span[1]/input',
+                f'//*[@id="drawer-container"]/div[1]/div/div[3]/div[1]/div[3]/fieldset/div/label[{option_number}]/span[1]/span[1]/input'
+            ]
+
+            for xpath in xpaths:
+                try:
+                    option = self.browser.find_element(By.XPATH, xpath)
+                    self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
+                    break
+                except:
+                    pass
+                
+            option.click()
+            sleep(time_for_each_question)
+            #sleep(2)
+
+            next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
+            next_button.click()
+            sleep(2)
+
+    def type_codes(self, no_of_questions, time_for_each_question):
+        
+        for question in range(1, no_of_questions + 1):
+            #typing_field_xpath = '//*[@id="editor"]/textarea'
+            #typing_field = self.browser.find_element(By.XPATH, typing_field_xpath)
+            #typing_field.click()
+            #typing_field.send_keys('#include<stdio.h>')
+            pass
+            sleep(time_for_each_question)
+
+            next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
+
+            next_button.click()
+            sleep(7)
+
+
+        
     def end_test(self, test, end_button, test_time):
-        sleep(test_time)
+        #sleep(test_time)
 
         end_button.click()
         sleep(1)        
@@ -257,6 +339,9 @@ class Talentely:
 
         self.logger.log_test_error()
         self.update_test_status(test, False)
+
+    
+    
 
 class logger:
     def __init__(self, email):
@@ -336,10 +421,6 @@ class discord:
             url = self.url2
 
         post(url, headers = self.headers, json = self.data)
-    
-
-
-
 
 
 def main():
@@ -381,7 +462,7 @@ def main():
         try:
             t.login()
         except Exception as exception:
-            print('\nSome Error Occured')
+            print('\nSome Error Occured at login')
 
         print('\nAutomation Started\n')
         t.perform_tests()
