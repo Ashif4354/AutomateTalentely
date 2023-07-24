@@ -20,14 +20,15 @@ class Talentely:
         self.logger = logger(self.email)
         self.coding_tests = ('c', )
         
-    def open_browser(self):
+    def open_browser(self, maximize = True):
         self.browser = webdriver.Edge()
-        self.browser.maximize_window()    
+        if maximize:
+            self.browser.maximize_window()    
 
     def login(self):
         self.open_browser()
         self.browser.get(self.url)
-        sleep(1)
+        sleep(1.5)
 
         email_field = self.browser.find_element(By.ID, 'username')        
         email_field.send_keys(self.email)
@@ -85,12 +86,14 @@ class Talentely:
         try:
             if test[0] == 'a':
                 aptitude_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/button')
+                self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', aptitude_button)
                 aptitude_button.click()
                 sleep(2)
                 self.navigate_aptitude(test)
 
             elif test[0] == 'c':
                 c_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/button')
+                self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', c_button)
                 c_button.click()
                 sleep(2)
                 self.navigate_c(test)
@@ -99,21 +102,24 @@ class Talentely:
                 pass
         except Exception as exception:
             print('\nSOME ERROR OCCURED', exception)
-            input("WAIT")
+            
     
     def navigate_aptitude(self, test):
         if test[1] == 'q':
             quantitative_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a')
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', quantitative_button)
             quantitative_button.click()
             sleep(2)
 
         elif test[1] == 'r':
             reasoning_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/a')
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', reasoning_button)
             reasoning_button.click()
             sleep(2)
 
         elif test[1] == 'v':
             verbal_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a')
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', verbal_button)
             verbal_button.click()
             sleep(2)
 
@@ -123,8 +129,9 @@ class Talentely:
         self.find_and_do_test(test)
 
     def navigate_c(self, test):
-        basic_c = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a')
-        basic_c.click()
+        basic_c_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a')
+        self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', basic_c_button)
+        basic_c_button.click()
         sleep(2)
 
         self.find_and_do_test(test)
@@ -217,13 +224,19 @@ class Talentely:
 
         try:
             end_test_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]')
+            
+            try:
+                answers = self.get_answers(test_name)
+            except:
+                self.end_test(test, end_test_button, test_time[0], answered = False)
+   
+            
+            self.do_test(test, test_time, answers)
+            
 
-            self.do_test(test, test_time)
-
-            self.end_test(test, end_test_button, test_time[0])
+            self.end_test(test, end_test_button, test_time[0], answered = True)
 
         except Exception as exception:
-            print(exception)
             self.end_test2(test)       
         
     
@@ -232,6 +245,14 @@ class Talentely:
         self.logger.log_start_test(test_name, test_time)
 
         sleep(5)
+    
+    def get_answers(self, test_name):
+        answers = {}
+
+        with open('Answers.json', 'r') as json_file:
+            answers = json.load(json_file)[test_name]
+        
+        return answers
 
     def get_number_of_questions(self):
         number = 1
@@ -251,43 +272,46 @@ class Talentely:
 
         return questions
 
-    def do_test(self, test, test_time):
+    def do_test(self, test, test_time, answers):
         no_of_questions = self.get_number_of_questions()
          
-        #print(no_of_questions)
         
         if test[0] not in self.coding_tests:
             time_for_each_question = test_time[0] / no_of_questions - 6
-            #print(time_for_each_question)
-            self.choose_options(no_of_questions, time_for_each_question)
+            self.choose_options(no_of_questions, time_for_each_question, answers)
         else:
             time_for_each_question = test_time[0] / no_of_questions - 15 #should change the -15 if type code is given
             self.type_codes(no_of_questions, time_for_each_question)
 
-    def choose_options(self, no_of_questions, time_for_each_question):
+    def choose_options(self, no_of_questions, time_for_each_question, answers):
 
         for question in range(1, no_of_questions + 1):
-            option_number = question % 4
-            if option_number == 0:
-                option_number = 4
-
+            answer = answers[str(question)]
+            
             xpaths = [
-                f'//*[@id="drawer-container"]/div/div/div[1]/div[1]/div[3]/fieldset/div/label[{option_number}]/span[1]/span[1]/input',
-                f'//*[@id="drawer-container"]/div[1]/div/div[1]/div[1]/div[3]/fieldset/div/label[{option_number}]/span[1]/span[1]/input',
-                f'//*[@id="drawer-container"]/div[1]/div/div[3]/div[1]/div[3]/fieldset/div/label[{option_number}]/span[1]/span[1]/input'
+                '//*[@id="drawer-container"]/div/div/div[1]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
+                '//*[@id="drawer-container"]/div[1]/div/div[1]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
+                '//*[@id="drawer-container"]/div[1]/div/div[3]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p'
             ]
 
             for xpath in xpaths:
+                
                 try:
-                    option = self.browser.find_element(By.XPATH, xpath)
-                    self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
-                    break
-                except:
+                    for i in range(1,5):
+                        xpath_ = xpath.format(i)
+                        option = self.browser.find_element(By.XPATH, xpath_)
+                        self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
+
+                        if  option.text == answer:
+                            option.click()
+                            break
+                    
+                except Exception as exception:
                     pass
                 
-            option.click()
+            
             sleep(time_for_each_question)
-            #sleep(2)
+            
 
             next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
             next_button.click()
@@ -310,7 +334,7 @@ class Talentely:
 
 
         
-    def end_test(self, test, end_button, test_time):
+    def end_test(self, test, end_button, test_time, answered):
         #sleep(test_time)
 
         end_button.click()
@@ -324,8 +348,12 @@ class Talentely:
         cancel_button.click()
         sleep(1)
 
-        self.logger.log_end_test()
-        self.update_test_status(test, True)
+        if answered:
+            self.logger.log_end_test()
+            self.update_test_status(test, True)
+        else:
+            self.logger.log_no_answers()
+
 
     def end_test2(self,test):
         
@@ -372,9 +400,6 @@ class logger:
 
         description = f'{self.email}' + '\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
         self.discord.send_embed(title = 'Test Started', description = description, url = 2)
-        
-        
-
 
     def log_end_test(self):
         with open('tests.log', 'a') as file:
@@ -388,7 +413,14 @@ class logger:
             file.write(f'TEST ERROR : Ended at {self.get_time()}' + '\n\n')  
 
         description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
-        self.discord.send_embed(title = 'TEST ERROR', description = description, url = 2)      
+        self.discord.send_embed(title = 'TEST ERROR', description = description, url = 2)   
+
+    def log_no_answers(self):
+        with open('tests.log', 'a') as file:
+            file.write(f'No Answers found for the test : Ended at {self.get_time()}' + '\n\n')  
+
+        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
+        self.discord.send_embed(title = 'No Answers', description = description, url = 2)
 
 class discord:
     def __init__(self, email):
@@ -455,8 +487,11 @@ def main():
             if pwd == '':
                 pwd = 'vidhai'
             student['password'] = pwd
+
             with open('Student.json', 'w') as json_file:
                 json.dump(student, json_file)
+
+            
 
         t = Talentely(student['email'], student['password'])       
         try:

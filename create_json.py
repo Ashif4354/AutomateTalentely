@@ -344,7 +344,8 @@ tests = {
 
 student = {
     'email' : '',
-    'password' : ''
+    'password' : '',
+    'percentage' : ''
 }
 
 new_dict = {}
@@ -352,7 +353,7 @@ for key in data_R.keys():
     key2 = key.lower()
     new_dict[key2] = data_R[key]
 
-with open('tests.json', 'w') as json_file:
-  json.dump(tests, json_file)
+with open('Student.json', 'w') as json_file:
+  json.dump(student, json_file)
 
 

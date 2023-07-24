@@ -20,3 +20,5 @@
 
 # If you close the application or the browser window at any time, dont worry, the application can continue from the same point (i.e. same test). progress will not reset.
 # If at any time the application closes by itself just run application again
+
+
