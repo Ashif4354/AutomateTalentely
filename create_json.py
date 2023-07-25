@@ -345,7 +345,9 @@ tests = {
 student = {
     'email' : '',
     'password' : '',
-    'percentage' : 100
+    'answer-percentage' : 100,
+    'time-percentage' : 100,
+    'attend-c-test' : False
 }
 
 new_dict = {}

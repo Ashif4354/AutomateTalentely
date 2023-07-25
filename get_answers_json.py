@@ -8,13 +8,12 @@ from time import sleep
 tests = {}
 Answers = {}
 
-with open('new_tests.json', 'r') as json_file:
+with open('tests_with_names.json', 'r') as json_file:
   tests = json.load(json_file)
 
 with open('Answers.json', 'r') as json_file:
-  tests = json.load(json_file)
+  Answers = json.load(json_file)
 
-new_tests = {'TESTS' : []}
 
 #tests = {'TESTS' : [["a", "v", "antonyms", 1, "Antonyms_Level_1_Test 1"]]}
 
@@ -93,7 +92,7 @@ def main():
         number = 1
         answers_ = {}
         
-
+        not_found_count = 0
         if test[0] == 'a':
             while True:
                 try:
@@ -102,9 +101,18 @@ def main():
                     answers_[number] = answer.text
                     #print(answer.text)
                     number += 1
-                except Exception as exception:
+                    not_found_count = 0
+
+                except Exception as exception:                    
                     #print('in except', exception)
-                    break
+                    if not_found_count == 5:
+                        break
+                    else:
+                        answers_[number] = ''
+                        number += 1
+                        not_found_count += 1
+                        continue
+                    
         elif test[0] == 'c':
             pass
         

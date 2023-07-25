@@ -8,19 +8,22 @@ from datetime import datetime
 from requests import post
 from random import randint, choice
 
+from logger import logger
+
 
 class Talentely:
-    def __init__(self, email, password = 'vidhai', percentage = 100):
+    def __init__(self, email, password = 'vidhai', answer_percentage = 100, time_percentage = 100, attend_c_test = False):
         self.url = 'https://system.talentely.com/login'
         self.browser  = None
         self.email = email
         self.password = password
         self.tests = None
         self.incomplete_tests = None
-        self.ERROR_tests = None
         self.logger = logger(self.email)
         self.coding_tests = ('c', )
-        self.percentage = percentage
+        self.answer_percentage = answer_percentage
+        self.time_percentage = time_percentage
+        self.attend_c_test = attend_c_test
         
     def open_browser(self, maximize = True):
         self.browser = webdriver.Edge()
@@ -93,7 +96,7 @@ class Talentely:
                 sleep(2)
                 self.navigate_aptitude(test)
 
-            elif test[0] == 'c':
+            elif test[0] == 'c' and self.attend_c_test:
                 c_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/button')
                 self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', c_button)
                 c_button.click()
@@ -180,6 +183,8 @@ class Talentely:
         elif total_time == 0 and test[0] == 'a':
             total_time = 1200
         
+        total_time = total_time * self.time_percentage / 100
+     
         return (total_time, test_time)
 
     def find_and_do_test(self, test):
@@ -193,7 +198,7 @@ class Talentely:
 
         test_button_2 = self.browser.find_element(By.ID, f'stepper{test[3]}')
         test_button_2.click()
-        sleep(2)
+        sleep(1)
 
         test_name = self.browser.find_element(By.XPATH, f'//*[@id="stepper{test[3]}"]/span/span[2]/span').text
 
@@ -211,6 +216,7 @@ class Talentely:
         except Exception as exception:
             self.update_test_status(test, False)
             self.browser.get('https://system.talentely.com/academy/courses')
+            sleep(3)
             return 
 
         try:
@@ -277,7 +283,7 @@ class Talentely:
     def do_test(self, test, test_time, answers):
         no_of_questions = self.get_number_of_questions()
         
-        correct_answers = int(no_of_questions * self.percentage / 100)
+        correct_answers = int(no_of_questions * self.answer_percentage / 100)
         
         if test[0] not in self.coding_tests:
             time_for_each_question = test_time[0] / no_of_questions - 6
@@ -288,7 +294,11 @@ class Talentely:
 
     def choose_options(self, no_of_questions, time_for_each_question, answers, correct_answers):
        
-        wrong_answers = []        
+        wrong_answers = []  
+
+        for answer in answers.keys():
+            if answers[answer] == '':
+                wrong_answers.append(int(answer))                  
 
         while len(wrong_answers) < no_of_questions - correct_answers:
             question_num = randint(1, no_of_questions)
@@ -308,12 +318,12 @@ class Talentely:
             for xpath in xpaths:
                 
                 try:
-                    for i in range(1,5):
+                    for i in range(1,7):
                         xpath_ = xpath.format(i)
                         option = self.browser.find_element(By.XPATH, xpath_)
                         self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
                         
-                        if  option.text == answer:
+                        if  option.text == answer or answer == '':
                             if question not in wrong_answers:
                                 option.click()
                                 break
@@ -339,8 +349,17 @@ class Talentely:
             
             sleep(time_for_each_question)            
 
-            next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
-            next_button.click()
+            try:
+                next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
+                next_button.click()
+            except:
+                warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
+                warning_ok_button.click()
+                sleep(.5)
+
+                next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
+                next_button.click()
+
             sleep(2)
 
     def type_codes(self, no_of_questions, time_for_each_question):
@@ -397,88 +416,6 @@ class Talentely:
     
     
 
-class logger:
-    def __init__(self, email):
-        self.email = email
-        self.discord = discord(self.email)
-
-        self.discord.send_embed(title = 'Automation Started For User', description = self.email, url = 1)
-        
-        files = listdir('.')
-        if 'tests.log' not in files:
-            with open('tests.log', 'a')as file:
-                file.write('Talentely tests logs\n\n\n')
-
-    def get_time(self):
-        now = datetime.now()
-        date_time = now.strftime("%d/%m/%Y %H:%M:%S")
-
-        return date_time
-
-    def log_start_test(self, test_name, test_time):
-        self.test_name = test_name
-
-        with open('tests.log', 'a') as file:
-            file.write('\n' + f'email : {self.email}' + '\n')
-            file.write(f'Test Name : {test_name}' + '\n')
-            file.write(f'Test Duration : {test_time}' + '\n')
-            file.write(f'Start Time : {self.get_time()}' + '\n')
-
-        description = f'{self.email}' + '\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
-        self.discord.send_embed(title = 'Test Started', description = description, url = 2)
-
-    def log_end_test(self):
-        with open('tests.log', 'a') as file:
-            file.write(f'End Time : {self.get_time()}' + '\n\n')      
-        
-        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
-        self.discord.send_embed(title = 'Test Finished', description = description, url = 2) 
-    
-    def log_test_error(self):
-        with open('tests.log', 'a') as file:
-            file.write(f'TEST ERROR : Ended at {self.get_time()}' + '\n\n')  
-
-        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
-        self.discord.send_embed(title = 'TEST ERROR', description = description, url = 2)   
-
-    def log_no_answers(self):
-        with open('tests.log', 'a') as file:
-            file.write(f'No Answers found for the test : Ended at {self.get_time()}' + '\n\n')  
-
-        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
-        self.discord.send_embed(title = 'No Answers', description = description, url = 2)
-
-class discord:
-    def __init__(self, email):
-        self.email = email
-        self.url1 = 'https://discord.com/api/webhooks/1132211379923853322/IbcrftADhJrMmJL-Y_lha1FXc0edPd-HpxXPjBOVwJ4iDWj4joz0dh-b6cc_J-yNzMYg'
-        self.url2 = 'https://discord.com/api/webhooks/1132233451567857694/LGnPeaWId7Xa-1NxL70bCDzB-wW6FbDvw7LCTI76m5nMvBUXLUhYBBy7SdLg9Q8kAJGO'
-        self.url3 = 'https://discord.com/api/webhooks/1132319132591870093/hluEIC2DkCz968qli82utVnMhm6WfrMzU5dwzHQMmQW9aR4X2Pf0OYmUooiSvvhi6h0x'
-        
-        self.headers = {
-            'Content-Type': 'application/json'
-        }
-        
-        self.data = {
-            'embeds' : [
-                {
-                    'title' : '',
-                    'description' : '',
-                    'color' : 0xffffff
-                }
-            ]
-        }
-
-    def send_embed(self, title, description, url):
-        self.data['embeds'][0]['title'] = title
-        self.data['embeds'][0]['description'] = description
-
-        if url == 1:
-            url = self.url1
-        else:
-            url = self.url2
-
-        post(url, headers = self.headers, json = self.data)
 
 
 def main():
@@ -493,7 +430,8 @@ def main():
             json.dump(test_status, json_file)
             
     print('\nDEVELOPED BY The DG')
-    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n\nYOUR OPTION : ")
+    print("READ THE '_README.txt' file before using this application for ease of access" )
+    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n5. Set Completion time percentage\n6. Choose to attend c programming test (without answers)\n\nYOUR OPTION : ")
     
     if option == '1':
         with open('Student.json', 'r') as file:
@@ -520,7 +458,7 @@ def main():
 
             
 
-        t = Talentely(student['email'], student['password'], student['percentage'])       
+        t = Talentely(student['email'], student['password'], student['answer-percentage'], student['time-percentage'], student['attend-c-test'])       
         try:
             t.login()
         except Exception as exception:
@@ -576,7 +514,38 @@ def main():
             print('Enter valid Percentage')
             return
 
-        student['percentage'] = percentage
+        student['answer-percentage'] = percentage
+
+        with open('Student.json', 'w') as json_file:
+            json.dump(student, json_file)
+    
+    elif option == '5':
+        with open('Student.json', 'r') as file:
+            student = json.load(file)
+
+        try:
+            percentage = int(input('Enter approximate percentage of time you want the application to attend all tests (The default is 100): '))
+
+            if percentage in range(101):
+                pass
+            else:
+                print('Percentage should be from 0 - 100')
+                
+                return
+        except:
+            print('Enter valid Percentage')
+            return
+
+        student['time-percentage'] = percentage
+
+        with open('Student.json', 'w') as json_file:
+            json.dump(student, json_file)
+
+    elif option == '6':
+        with open('Student.json', 'r') as file:
+            student = json.load(file)
+        
+        student['attend-c-test'] = True
 
         with open('Student.json', 'w') as json_file:
             json.dump(student, json_file)
