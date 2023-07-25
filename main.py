@@ -6,10 +6,11 @@ import json
 from os import listdir
 from datetime import datetime
 from requests import post
+from random import randint, choice
 
 
 class Talentely:
-    def __init__(self, email, password = 'vidhai'):
+    def __init__(self, email, password = 'vidhai', percentage = 100):
         self.url = 'https://system.talentely.com/login'
         self.browser  = None
         self.email = email
@@ -19,6 +20,7 @@ class Talentely:
         self.ERROR_tests = None
         self.logger = logger(self.email)
         self.coding_tests = ('c', )
+        self.percentage = percentage
         
     def open_browser(self, maximize = True):
         self.browser = webdriver.Edge()
@@ -274,20 +276,29 @@ class Talentely:
 
     def do_test(self, test, test_time, answers):
         no_of_questions = self.get_number_of_questions()
-         
+        
+        correct_answers = int(no_of_questions * self.percentage / 100)
         
         if test[0] not in self.coding_tests:
             time_for_each_question = test_time[0] / no_of_questions - 6
-            self.choose_options(no_of_questions, time_for_each_question, answers)
+            self.choose_options(no_of_questions, time_for_each_question, answers, correct_answers)
         else:
             time_for_each_question = test_time[0] / no_of_questions - 15 #should change the -15 if type code is given
             self.type_codes(no_of_questions, time_for_each_question)
 
-    def choose_options(self, no_of_questions, time_for_each_question, answers):
+    def choose_options(self, no_of_questions, time_for_each_question, answers, correct_answers):
+       
+        wrong_answers = []        
+
+        while len(wrong_answers) < no_of_questions - correct_answers:
+            question_num = randint(1, no_of_questions)
+
+            if question_num not in wrong_answers:
+                wrong_answers.append(question_num)        
 
         for question in range(1, no_of_questions + 1):
-            answer = answers[str(question)]
-            
+            answer = answers[str(question)]            
+                
             xpaths = [
                 '//*[@id="drawer-container"]/div/div/div[1]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
                 '//*[@id="drawer-container"]/div[1]/div/div[1]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
@@ -301,17 +312,32 @@ class Talentely:
                         xpath_ = xpath.format(i)
                         option = self.browser.find_element(By.XPATH, xpath_)
                         self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
-
+                        
                         if  option.text == answer:
-                            option.click()
-                            break
+                            if question not in wrong_answers:
+                                option.click()
+                                break
+                            else:
+                                option_numbers = [1, 2, 3, 4] 
+                                try:
+                                    option_numbers.remove(i)
+                                except:
+                                    pass
+                                
+                                xpath_ = xpath.format(choice(option_numbers))
+                                option = self.browser.find_element(By.XPATH, xpath_)
+                                self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
+                                option.click()
+                                break
+                        else:
+                            continue
+
                     
                 except Exception as exception:
                     pass
                 
             
-            sleep(time_for_each_question)
-            
+            sleep(time_for_each_question)            
 
             next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
             next_button.click()
@@ -324,8 +350,8 @@ class Talentely:
             #typing_field = self.browser.find_element(By.XPATH, typing_field_xpath)
             #typing_field.click()
             #typing_field.send_keys('#include<stdio.h>')
-            pass
             sleep(time_for_each_question)
+            
 
             next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
 
@@ -467,7 +493,7 @@ def main():
             json.dump(test_status, json_file)
             
     print('\nDEVELOPED BY The DG')
-    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n\nYOUR OPTION : ")
+    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n\nYOUR OPTION : ")
     
     if option == '1':
         with open('Student.json', 'r') as file:
@@ -486,6 +512,7 @@ def main():
             pwd = input("Enter password only if its other than 'vidhai' else press enter : ")
             if pwd == '':
                 pwd = 'vidhai'
+
             student['password'] = pwd
 
             with open('Student.json', 'w') as json_file:
@@ -493,7 +520,7 @@ def main():
 
             
 
-        t = Talentely(student['email'], student['password'])       
+        t = Talentely(student['email'], student['password'], student['percentage'])       
         try:
             t.login()
         except Exception as exception:
@@ -502,13 +529,13 @@ def main():
         print('\nAutomation Started\n')
         t.perform_tests()
     
-    if option == '2':
+    elif option == '2':
 
         reset_status()
 
         print('\nTEST PROGRESS HAS BEEN RESET\n')
         
-    if  option == '3':
+    elif  option == '3':
         student = {} 
 
         for i in range(3):
@@ -530,7 +557,33 @@ def main():
         
         reset_status()
         print('STUDENT DETAILS HAS BEEN UPDATED and progress has been reset')
+    
+    elif option == '4':
 
+        with open('Student.json', 'r') as file:
+            student = json.load(file)
+
+        try:
+            percentage = int(input('Enter approximate percentage of questions you want to be answered correctly for all tests (The default is 100): '))
+
+            if percentage in range(101):
+                pass
+            else:
+                print('Percentage should be from 0 - 100')
+                
+                return
+        except:
+            print('Enter valid Percentage')
+            return
+
+        student['percentage'] = percentage
+
+        with open('Student.json', 'w') as json_file:
+            json.dump(student, json_file)
+
+    
+    else:
+        print('ENTER VALID OPTION')
 
 if __name__ == '__main__':
     main()

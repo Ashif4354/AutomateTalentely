@@ -11,6 +11,9 @@ Answers = {}
 with open('new_tests.json', 'r') as json_file:
   tests = json.load(json_file)
 
+with open('Answers.json', 'r') as json_file:
+  tests = json.load(json_file)
+
 new_tests = {'TESTS' : []}
 
 #tests = {'TESTS' : [["a", "v", "antonyms", 1, "Antonyms_Level_1_Test 1"]]}
