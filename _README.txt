@@ -54,3 +54,11 @@
 # The time attended for each test may vary by 1 minute, regardless the user mentions percentage or not
 # If you are choosing to set time percentage, its best to set a value more than 60%, but its upto you. (The default is 100%)
 # The training cell demands minimum 50% test time
+
+# You can manually select which tests to attend
+# Just select option 7 after you launch the application
+# A browser window will open up listing all the tests assigned by the training cell
+# After you click save button, a 'tests.json' file will be downloaded automatically
+# Just replace the 'tests.json' file in the root directory with the downloaded 'tests.json' file
+# reset your progress by selecting option 2 after launching the application
+# Changes will not be reflected unless you reset your progress

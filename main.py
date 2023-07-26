@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 import json
-from os import listdir
+from os import listdir, getcwd, path
 from datetime import datetime
 from requests import post
 from random import randint, choice
@@ -301,7 +301,7 @@ class Talentely:
             if self.time_percentage in range(91, 101):
                 time_for_each_question = test_time[0] / no_of_questions - 5
             else:
-                time_for_each_question = test_time[0] / no_of_questions
+                time_for_each_question = test_time[0] / no_of_questions - 2
             self.choose_options(no_of_questions, time_for_each_question, answers, correct_answers)
         else:
             time_for_each_question = test_time[0] / no_of_questions - 15 #should change the -15 if type code is given
@@ -450,7 +450,7 @@ def main():
             
     print('\nDEVELOPED BY The DG')
     print("READ THE '_README.txt' file before using this application for ease of access" )
-    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n5. Set Completion time percentage\n6. Choose to attend c programming test (without answers)\n\nYOUR OPTION : ")
+    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n5. Set Completion time percentage\n6. Choose to attend c programming test (without answers)\n7. Manually select which tests to attend\n\nYOUR OPTION : ")
     
     if option == '1':
         with open('Student.json', 'r') as file:
@@ -568,6 +568,11 @@ def main():
 
         with open('Student.json', 'w') as json_file:
             json.dump(student, json_file)
+    elif option == '7':
+        browser = webdriver.Edge()
+        browser.get(path.join(getcwd(), 'select_tests.html'))
+        input()
+        
 
     
     else:

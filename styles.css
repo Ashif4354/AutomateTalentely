@@ -1,0 +1,33 @@
+table {
+    width: 30%;
+    border-collapse: collapse;
+  }
+  
+  td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    text-align: center;
+    border: 1px solid black;
+  }
+  
+  h1, h3, p {
+    color: #333;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  
