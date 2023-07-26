@@ -84,7 +84,7 @@ class Talentely:
             print(f"{len(self.get_json('TestStatus')['ERROR'])} tests error")        
             self.browser.close()
 
-        input('PRESS ENTER')
+        input('PRESS ENTER')#This line is to keep the app window open after completion
         
 
     def navigate_home_page(self, test):
@@ -160,8 +160,8 @@ class Talentely:
         else:
             pass
 
-    def get_test_time(self, test):
-        test_time = self.browser.find_element(By.XPATH, f'//*[@id="height{test[3] - 1}"]/div/div/div/div[2]/p[1]/b')
+    def get_test_time(self, test, index):
+        test_time = self.browser.find_element(By.XPATH, f'//*[@id="height{index - 1}"]/div/div/div/div[2]/p[1]/b')
         test_time = test_time.text.replace(' ', '').split(':')
 
         if len(test_time) == 2:
@@ -187,6 +187,20 @@ class Talentely:
      
         return (total_time, test_time)
 
+    def click_test(self, test):
+        
+        count = 1
+        while True:
+            test_button_2 = self.browser.find_element(By.ID, f'stepper{count}')
+            if test[4].lower() in test_button_2.text.lower():
+                test_button_2.click()
+                break
+            
+            count += 1
+            
+        return count
+
+    
     def find_and_do_test(self, test):
 
         test_xpath = self.get_test_xpath(test)
@@ -196,20 +210,18 @@ class Talentely:
         test_button.click()
         sleep(2)
 
-        test_button_2 = self.browser.find_element(By.ID, f'stepper{test[3]}')
-        test_button_2.click()
-        sleep(1)
+        index = self.click_test(test)
 
-        test_name = self.browser.find_element(By.XPATH, f'//*[@id="stepper{test[3]}"]/span/span[2]/span').text
+        test_name = test[4]
 
         body = self.browser.find_element(By.XPATH, '/html/body')
         body.click()
         sleep(1)
 
-        test_time = self.get_test_time(test)
+        test_time = self.get_test_time(test, index)
 
         try:
-            start_test_button = self.browser.find_element(By.XPATH, f'//*[@id="height{test[3] - 1}"]/div/div/div/button/span[1]')
+            start_test_button = self.browser.find_element(By.XPATH, f'//*[@id="height{index - 1}"]/div/div/div/button/span[1]')
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', start_test_button)
             self.start_test(start_test_button, test_name, test_time[1])
 
@@ -286,8 +298,8 @@ class Talentely:
         correct_answers = int(no_of_questions * self.answer_percentage / 100)
         
         if test[0] not in self.coding_tests:
-            if self.time_percentage == 100:
-                time_for_each_question = test_time[0] / no_of_questions - 6
+            if self.time_percentage in range(91, 101):
+                time_for_each_question = test_time[0] / no_of_questions - 5
             else:
                 time_for_each_question = test_time[0] / no_of_questions
             self.choose_options(no_of_questions, time_for_each_question, answers, correct_answers)
@@ -299,9 +311,9 @@ class Talentely:
        
         wrong_answers = []  
 
-        for answer in answers.keys():
-            if answers[answer] == '':
-                wrong_answers.append(int(answer))                  
+        for index in range(1, no_of_questions + 1):
+            if answers[str(index)] == '':
+                wrong_answers.append(index)
 
         while len(wrong_answers) < no_of_questions - correct_answers:
             question_num = randint(1, no_of_questions)
