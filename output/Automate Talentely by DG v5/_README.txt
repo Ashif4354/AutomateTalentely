@@ -10,6 +10,7 @@
 # Good Internet connectivity with less interruption is recommended 
 # 400MB of free RAM is recommended
 # Modification of json files is not appreciated
+# The application may stop on rare occasions due to exceptions , so just restart the app to continue
 
 # Close all Background process for less interruptions
 ##----------------------------------------------------------------#
@@ -50,6 +51,6 @@
 
 # You can specify how much time to attend each test in percentage
 # Just select option 5 when you open the application, and enter the percentage
-# The time attended for each test may vary by 1 minute, even if time percentage is mentioned by the user or not
+# The time attended for each test may vary by 1 minute, regardless the user mentions percentage or not
 # If you are choosing to set time percentage, its best to set a value more than 60%, but its upto you. (The default is 100%)
 # The training cell demands minimum 50% test time

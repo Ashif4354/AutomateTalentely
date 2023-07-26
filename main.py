@@ -242,7 +242,7 @@ class Talentely:
             self.do_test(test, test_time, answers)
             
 
-            self.end_test(test, end_test_button, test_time[0], answered = True)
+            self.end_test(test, test_time[0], answered = True)
 
         except Exception as exception:
             self.end_test2(test)       
@@ -286,7 +286,10 @@ class Talentely:
         correct_answers = int(no_of_questions * self.answer_percentage / 100)
         
         if test[0] not in self.coding_tests:
-            time_for_each_question = test_time[0] / no_of_questions - 6
+            if self.time_percentage != 100:
+                time_for_each_question = test_time[0] / no_of_questions - 6
+            else:
+                time_for_each_question = test_time[0] / no_of_questions
             self.choose_options(no_of_questions, time_for_each_question, answers, correct_answers)
         else:
             time_for_each_question = test_time[0] / no_of_questions - 15 #should change the -15 if type code is given
@@ -307,7 +310,7 @@ class Talentely:
                 wrong_answers.append(question_num)        
 
         for question in range(1, no_of_questions + 1):
-            answer = answers[str(question)]            
+            answer = answers[str(question)].lower()        
                 
             xpaths = [
                 '//*[@id="drawer-container"]/div/div/div[1]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
@@ -322,8 +325,8 @@ class Talentely:
                         xpath_ = xpath.format(i)
                         option = self.browser.find_element(By.XPATH, xpath_)
                         self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
-                        
-                        if  option.text == answer or answer == '':
+                        text = option.text.lower()
+                        if  (text in answer or answer in text or text == answer) or answer == '':
                             if question not in wrong_answers:
                                 option.click()
                                 break
@@ -379,8 +382,12 @@ class Talentely:
 
 
         
-    def end_test(self, test, end_button, test_time, answered):
+    def end_test(self, test, test_time, answered):
         #sleep(test_time)
+        try:
+            end_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]')
+        except:
+            self.end_test2(test) 
 
         end_button.click()
         sleep(1)        
