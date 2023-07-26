@@ -286,7 +286,7 @@ class Talentely:
         correct_answers = int(no_of_questions * self.answer_percentage / 100)
         
         if test[0] not in self.coding_tests:
-            if self.time_percentage != 100:
+            if self.time_percentage == 100:
                 time_for_each_question = test_time[0] / no_of_questions - 6
             else:
                 time_for_each_question = test_time[0] / no_of_questions
@@ -401,7 +401,7 @@ class Talentely:
         sleep(1)
 
         if answered:
-            self.logger.log_end_test()
+            self.logger.log_end_test(len(self.get_json('TestStatus')['COMPLETED']))
             self.update_test_status(test, True)
         else:
             self.logger.log_no_answers()
@@ -417,7 +417,7 @@ class Talentely:
             ok_button.click()
         sleep(1)
 
-        self.logger.log_test_error()
+        self.logger.log_test_error(len(self.get_json('TestStatus')['COMPLETED']))
         self.update_test_status(test, False)
 
     

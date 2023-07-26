@@ -32,18 +32,18 @@ class logger:
         description = f'{self.email}' + '\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
         self.discord.send_embed(title = 'Test Started', description = description, url = 2)
 
-    def log_end_test(self):
+    def log_end_test(self, count):
         with open('tests.log', 'a') as file:
             file.write(f'End Time : {self.get_time()}' + '\n\n')      
         
-        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
+        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}' + '\n' + 'Test count : ' + f'{count}'
         self.discord.send_embed(title = 'Test Finished', description = description, url = 2) 
     
-    def log_test_error(self):
+    def log_test_error(self, count):
         with open('tests.log', 'a') as file:
             file.write(f'TEST ERROR : Ended at {self.get_time()}' + '\n\n')  
 
-        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}'
+        description = f'{self.email}' + '\n\n' + f'{self.test_name}' + '\n' + f'{self.get_time()}' + '\n' + 'Test count : ' + f'{count}'
         self.discord.send_embed(title = 'TEST ERROR', description = description, url = 2)   
 
     def log_no_answers(self):
