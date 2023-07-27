@@ -8,14 +8,19 @@ from time import sleep
 tests = {}
 Answers = {}
 
-with open('tests_with_names.json', 'r') as json_file:
+with open('tests.json', 'r') as json_file:
   tests = json.load(json_file)
 
 with open('Answers.json', 'r') as json_file:
   Answers = json.load(json_file)
 
 
-#tests = {'TESTS' : [["a", "v", "antonyms", 1, "Antonyms_Level_1_Test 1"]]}
+tests = {'TESTS' : [["a", "q", "averages", 1, "Averages_Level_3_Test 1"], ["a", "q", "averages", 2, "Averages_Level_1_Test 1"], ["a", "q", "pipes and cisterns", 1, "Pipes and Cistern_Level_1_Test 1"], ["a", "r", "coding and decoding", 1, "Coding and Decoding_Level_1_Test 1"]]}
+
+def check_answers():
+    for test in Answers.keys():
+        if len(Answers[test]) < 6:
+            print(test, Answers[test])
 
 def main():
     t = Talentely('20cs008@kcgcollege.com', 'vidhai')
@@ -93,18 +98,28 @@ def main():
         answers_ = {}
         
         not_found_count = 0
+        xpaths = []
         if test[0] == 'a':
+            print(test)
             while True:
                 try:
-                    answer_xpath = f'//*[@id="main-content"]/div/div[2]/div/div/div[2]/div/div/div[9]/div/div/div/div/table/tbody/tr[{number}]/td/div/div/div[1]/div[3]/div[2]/p'
-                    answer = t.browser.find_element(By.XPATH, answer_xpath)
+                    try:
+                        answer_xpath = f'//*[@id="main-content"]/div/div[2]/div/div/div[2]/div/div/div[9]/div/div/div/div/table/tbody/tr[{number}]/td/div/div/div[1]/div[3]/div[2]/p'
+                        answer = t.browser.find_element(By.XPATH, answer_xpath)
+                    except:           #f'//*[@id="main-content"]/div/div[2]/div/div/div[2]/div/div/div[7]/div/div/div/div/table/tbody/tr[1]/td/div/div/div[1]/div[3]/div[2]/p
+                        try:
+                            answer_xpath = f'//*[@id="main-content"]/div/div[2]/div/div/div[2]/div/div/div[7]/div/div/div/div/table/tbody/tr[{number}]/td/div/div/div[1]/div[3]/div[2]/p'
+                            answer = t.browser.find_element(By.XPATH, answer_xpath)
+                        except:
+                            raise Exception
+                        
                     answers_[number] = answer.text
                     #print(answer.text)
                     number += 1
                     not_found_count = 0
 
                 except Exception as exception:                    
-                    #print('in except', exception)
+                    print('in except', exception)
                     if not_found_count == 5:
                         break
                     else:
@@ -116,7 +131,7 @@ def main():
         elif test[0] == 'c':
             pass
         
-        #print(answers_)
+        print(answers_)
         Answers[test[4]] = answers_        
 
         with open('Answers.json', 'w') as json_file:
@@ -126,7 +141,9 @@ def main():
         print(count_)
 
 if __name__ == '__main__':
-    main()
+    #main()
+    check_answers()
+
 
 
 

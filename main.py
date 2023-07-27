@@ -107,6 +107,7 @@ class Talentely:
                 pass
         except Exception as exception:
             print('\nSOME ERROR OCCURED', exception)
+            input('WAAIT')
             
     
     def navigate_aptitude(self, test):
@@ -257,6 +258,7 @@ class Talentely:
             self.end_test(test, test_time[0], answered = True)
 
         except Exception as exception:
+            print("EXCEPTION", exception)
             self.end_test2(test)       
         
     
@@ -359,6 +361,7 @@ class Talentely:
 
                     
                 except Exception as exception:
+                    print(exception)
                     pass
                 
             

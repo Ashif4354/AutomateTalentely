@@ -11,8 +11,8 @@ with open('tests.json', 'r') as json_file:
 
 for i in testsstatus.keys():
     for j in testsstatus[i]:
-        #print(j)
-        test = j
+        print(j)
+        test = j[ : 4]
 
         for k in test_with_names['TESTS']:
             print(k[:4])
@@ -20,7 +20,8 @@ for i in testsstatus.keys():
                 print('HELLLLLLLLLLLLLLLLo')
                 
                 new_tests[i].append(k)
-        #input("WAAIT")
+        
+       # input("WAAIT")
 
 
 with open('TestStatus.json', 'w') as file:
