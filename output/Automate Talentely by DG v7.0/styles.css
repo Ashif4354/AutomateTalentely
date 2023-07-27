@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=REM:wght@300&display=swap');
+
+body {
+  background: whitesmoke;
+  /* text-align: center; */
+}
+
+table {
+  color: rgb(59, 59, 59);
+  background-color: #f0f0f0;
+  /* backface-visibility: hidden; */
+  /* background-image: url("https://e0.pxfuel.com/wallpapers/1016/182/desktop-wallpaper-black-texture-hq-red-grey-and-black.jpg"); */
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  width: max-content;
+}
+
+input {
+  background-color: #007bff;
+  /* padding: 10px; */
+  cursor: pointer;
+  margin: 10px 10px 0px 10px;
+  text-align: center;
+  height: 15px;
+  width: 15px;
+}
+
+td {
+  border: 1px solid transparent;
+  padding: 8px 25px 8px 15px;
+  border-radius: 5px;
+  font-size: smaller;
+  width: min-content;
+  text-align: left;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /* margin: 0px 20px; */
+  /* background-color: #007bff; */
+}
+
+tr {
+  /* width: 70%; */
+}
+
+th {
+  border-radius: 10px;
+  text-align: center;
+  font-size: small;
+  margin: 10px;
+  background-color: #2196F3;
+  color: #ffffff;
+  /* Adjust the background color to a lighter shade */
+  padding: 10px;
+  font-family: 'REM', sans-serif;
+}
+
+h1,
+h3,
+p {
+  color: #333;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.Header {
+  text-align: center;
+  padding: 30px;
+  background-color: #FFC113;
+  font-weight: bolder;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-family: 'Anton', sans-serif;
+}
+
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+.note {
+  margin-left: auto;
+  margin-right: auto;
+  /* padding: 8px 16px; */
+
+  width: max-content;
+  /* background-color: transparent; */
+  /* color: whitesmoke; */
+  font-size: smaller;
+  font-family: 'REM', sans-serif;
+  background-color: transparent;
+}
+
+.notes {
+  font-size: smaller;
+  font-family: 'REM', sans-serif;
+  text-align: center;
+}
+
+.ulList {
+  margin-top: 15px;
+  /* text-align: left; */
+  /* list-style:none; */
+  /* margin-top: 30px; */
+  /* background-color: #007bff; */
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  /* background-color: aqua; */
+  text-align: center;
+}
+
+li {
+  /* width: max-content; */
+  margin-top: 10px;
+  text-align: center;
+}
+
+.btn {
+  background-color: #FFC113;
+  color: #fff;
+  font-size: x-small;
+  font-weight: bolder;
+  padding: 10px 48px;
+  border-radius: 20px;
+}
+
+.btns {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 20px;
+  padding: 30px;
+  background: rgb(238, 238, 238);
+  color: #333;
+  text-align: center;
+}

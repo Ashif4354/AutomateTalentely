@@ -2,21 +2,51 @@
 <html>
 
 <head>
-    <title>Show JSON Data in HTML</title>
+    <title>Talently Test</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>SELECT TESTS</h1>
-    <h3>Click save after selecting tests</h3>
-    <p>This lists only tests assigned by the training cell</p>
-    <p>Test names listed below are the exact names from talentely portal</p>
-    <p>After you click save button, 'tests.json' file will be downloaded automatically</p>
-    <p>just replace the 'tests.json' file in the root directory with the downloaded 'tests.json' file</p>
-    <p>Changes will not be reflected unless you reset your progress</p>
-    <button onclick='selectall()'>Select all</button>
-    <button onclick='selectnone()'>Select none</button><br><br>
-    <button onclick='save()'>SAVE</button><br><br>
+    <h1 class="Header">SELECT TESTS</h1>
+    <h3 class="note">Click save after selecting tests</h3>
+    <br />
+    <ul class="ulList">
+        <li>
+            <p class="notes">This lists only tests assigned by the training cell</p>
+        </li>
+    </ul>
+    <ul class="ulList">
+        <li>
+            <p class="notes">Changes will not be reflected unless you reset your progress</p>
+        </li>
+    </ul>
+    <ul class="ulList">
+        <li>
+            <p class="notes">Test names listed below are the exact names from talentely portal</p>
+        </li>
+    </ul>
+    <ul class="ulList">
+        <li>
+            <p class="notes">After you click save button, 'tests.json' file will be downloaded automatically</p>
+        </li>
+    </ul>
+    <ul class="ulList">
+        <li>
+            <p class="notes">Just replace the 'tests.json' file in the root directory with the downloaded
+                'tests.json' file</p>
+        </li>
+    </ul>
+    <ul class="ulList">
+        <li>
+            <p class="notes">Changes will not be reflected unless you reset your progress using reset progress option</p>
+        </li>
+    </ul>
+    <br />
+    <div class="btns">
+        <button class="btn" onclick='selectall()'>Select all</button>
+        <button class="btn" onclick='selectnone()'>Select none</button><br><br>
+        <button class="btn" onclick='save()'>SAVE</button><br><br>
+    </div>
     <script>
         function save() {
             tests = { 'TESTS': [] }
@@ -45,7 +75,7 @@
         function download_json(tests) {
             const jsonData = JSON.stringify(tests);
 
-            const fileName = "tests.json";
+            const fileName = "object.json";
 
             const blob = new Blob([jsonData], {
                 type: "application/json"
@@ -83,7 +113,7 @@
         //console.log(keys)
 
         var table = document.createElement('table');
-        table.border = 1
+        // table.border = 1
 
         var count = 1
         for (date in All_tests) {
@@ -91,38 +121,95 @@
             var cell = document.createElement('th');
 
             cell.textContent = date
-            cell.colSpan = 2;
+            cell.colSpan = 6;
             row.appendChild(cell);
 
             table.appendChild(row);
             //console.log(All_tests[date])
             //break;
 
-            for (let i = 0; i < All_tests[date].length; i++) {
+            for (let i = 0; i < All_tests[date].length; i += 3) {
                 //console.log(test)
                 let row = document.createElement('tr');
-                let cell = document.createElement('td');
-                cell.textContent = All_tests[date][i][4]
-                row.appendChild(cell);
+                row.className = "tableRow";
 
-                let cell2 = document.createElement('td');
+                let cell = document.createElement('td');
                 let checkbox = document.createElement('input');
                 checkbox.type = 'checkbox'
                 checkbox.id = 'test' + count
                 checkbox.value = All_tests[date][i][4]
 
-                cell2.appendChild(checkbox)
-
+                cell.appendChild(checkbox)
                 row.appendChild(checkbox);
-                table.appendChild(row);
+
+                let cell2 = document.createElement('td');
+                cell2.textContent = All_tests[date][i][4]
+                row.appendChild(cell2);
 
                 count++;
+
+                try {
+                    if (i + 1 <= All_tests[date].length) {
+
+                        cell = document.createElement('td');
+                        checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox'
+                        checkbox.id = 'test' + count
+                        checkbox.value = All_tests[date][i + 1][4]
+
+                        cell.appendChild(checkbox)
+                        row.appendChild(checkbox);
+
+                        cell2 = document.createElement('td');
+                        cell2.textContent = All_tests[date][i + 1][4]
+                        row.appendChild(cell2);
+
+                        count++;
+                    }
+
+                } catch (error) {
+                    //console.log(error);
+                    // break;
+                }
+
+                try {
+                    if (i + 2 <= All_tests[date].length) {
+
+                        cell = document.createElement('td');
+                        checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox'
+                        checkbox.id = 'test' + count
+                        checkbox.value = All_tests[date][i + 2][4]
+
+                        cell.appendChild(checkbox)
+                        row.appendChild(checkbox);
+
+                        cell2 = document.createElement('td');
+                        cell2.textContent = All_tests[date][i + 2][4]
+                        row.appendChild(cell2);
+
+                        count++;
+                    }
+                } catch (error) {
+                    //console.log(error);
+                    // break;
+                }
+
+                table.appendChild(row);
+
+
             }
         }
 
         document.body.appendChild(table);
     </script><br>
-    <button onclick='save()'>SAVE</button>
+    <div class="btns">
+        <button class="btn" onclick='save()'>SAVE</button>
+    </div>
+    <footer>
+        <p>Built With &#128147; For Students</p>
+        <p>Developed by DG and friends</p>
+    </footer>
 </body>
 
 </html>

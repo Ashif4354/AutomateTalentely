@@ -24,7 +24,7 @@
 # Some test might not open and throws error, These have been handled too
 
 # All the answers has been taken from Talentely portal only.
-# It has been noted that some of the answers in the talentely portal itself is wrong , so these questions will not be answered correctly. sorry for inconvenience
+# It has been noted that some of the answers in the talentely portal itself is wrong , so these questions will not be answered correctly or skipped. sorry for inconvenience
 # Frequency of these wrong answers is less than 1%, So no need to worry
 
 # This application does not have answers to c programming questions 
@@ -41,6 +41,7 @@
 # Dont select reset progress option unless you want to reset progress
 # The Progress does not reset itself.
 # If the progress is reset, all the test will be performed from first by the application
+# If you recieve a new version of the application  from the developer, make sure after extracting it , you replace 'TestStatus.json' of the new version with the previous version's 'TestStatus.json' file, it is to restore your test progress
 
 # If you close the application or the browser window at any time, dont worry, the application can continue from the same point (i.e. same test). progress will not reset.
 # If at any time the application closes by itself just run application again
