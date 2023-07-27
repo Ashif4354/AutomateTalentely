@@ -1,0 +1,20 @@
+TCS - Talentely Completion Service
+
+This application is developed by DG
+DONT SHARE this application without DG's permission
+
+This software is meant for students of KCG College of Technology ONLY
+
+Developer / Alpha Tester - DQILKT
+
+Team 
+- DQILKT
+- NBQDQLBT
+- GMEQMNLV 
+
+Idea providers 
+- GMEQMNLV
+- DBIBLWLW
+- IDWMRT
+
+The above names are encrypted using playfair cipher , and if you find the key used while encrypting it, you get find our names,  and if you come to the developer and tell the correct key value, he will give you a small gift

@@ -5,12 +5,13 @@
 # Do not worry, this application is not a virus
 
 # You need not install anything to run this application
-# 1920 X 1080 resolution is recommended, however it may run in other resolution too 
+# 1920 X 1080 resolution is recommended
 # Latest version of Microsoft EDGE browser is recommended
 # Good Internet connectivity with less interruption is recommended 
 # 400MB of free RAM is recommended
 # Modification of json files is not appreciated
 # The application may stop on rare occasions due to exceptions , so just restart the app to continue
+# Make sure the PC doesnt go into sleep mode automatically
 
 # Close all Background process for less interruptions
 ##----------------------------------------------------------------#
