@@ -4,13 +4,13 @@
 #define MyAppName "Automate Talentely"
 #define MyAppVersion "7.3"
 #define MyAppPublisher "DG"
-#define MyAppURL "https://talentelycompletionservice.netlify.app"
+#define MyAppURL "https://automatetalentely.netlify.app/"
 #define MyAppExeName "Automate Talentely.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{94E9C54F-AEB0-44E1-92AE-F1940EA15152}
+AppId={{3BAEF21A-D014-47F2-B5FB-03CBCAE95EC9}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
