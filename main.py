@@ -79,8 +79,6 @@ class Talentely:
         self.time_percentage = time_percentage
         self.attend_c_test = attend_c_test
         self.logger = logger(self.email)
-        self.check_update()
-
 
     def open_browser(self, maximize = True):
         self.browser = webdriver.Edge()
