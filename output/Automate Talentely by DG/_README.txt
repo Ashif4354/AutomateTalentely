@@ -1,15 +1,17 @@
 #READ FULLY#
 
+# visit automatetalentely.netlify.app for more info
+
 # This application is developed by DG
 # DONT SHARE this application without DG's permission
 # Do not worry, this application is not a virus
 
-# You need not install anything to run this application
-# 1920 X 1080 resolution is recommended
+# You need not install anything else to run this application
+# 1920 X 1080 resolution is recommended, and scale value of 100% is recommended
 # Latest version of Microsoft EDGE browser is recommended
 # Good Internet connectivity with less interruption is recommended 
-# 400MB of free RAM is recommended
-# Modification of json files is not appreciated
+# Minimum 400MB of free RAM is recommended
+# Avoid modification of json files
 # The application may stop on rare occasions due to exceptions , so just restart the app to continue
 # Make sure the PC doesnt go into sleep mode automatically
 
@@ -32,24 +34,23 @@
 # So it will not attend c programming tests
 # However you can choose to make the application attend the c programming test without the application typing the code
 # After opening the application choose option 6 to enable the application to attend c programming tests(without answers)
-# You can do it manually too, open 'Student.json' with a text editor, and set the value of 'attend-c-test' to true or false respectively
-# How ever in future versions , A solution for this problem can be introduced
+# How ever in future versions , A solution for this problem may be introduced
 
 # Enter email and password correctly
-# If you enter wrong email or password, just choose option 3 after opening the aplication and edit your details
+# If you enter wrong email or password or if you wish to change it, just choose option 3 after opening the aplication and edit your details
+# Changing user credentials resets the test progress
 
 # The test progress denotes  the tests completed by the application not the user
 # Dont select reset progress option unless you want to reset progress
 # The Progress does not reset itself.
 # If the progress is reset, all the test will be performed from first by the application
-# If you recieve a new version of the application  from the developer, make sure after extracting it , you replace 'TestStatus.json' of the new version with the previous version's 'TestStatus.json' file, it is to restore your test progress
 
 # If you close the application or the browser window at any time, dont worry, the application can continue from the same point (i.e. same test). progress will not reset.
-# If at any time the application closes by itself just run application again
+# In any case, if the application closes by itself just run application again
 
 # You can specify how much percentage of questions need to be answered correctly 
 # Just select option 4 when you open the application, and enter the percentage
-# The number of correctly answered question according to the percentage give by user can vary because Talentely portal is shit
+# The number of correctly answered question according to the percentage give by user can vary because Talentely portal is not perfect
 
 # You can specify how much time to attend each test in percentage
 # Just select option 5 when you open the application, and enter the percentage
@@ -62,5 +63,5 @@
 # A browser window will open up listing all the tests assigned by the training cell
 # After you click save button, a 'tests.json' file will be downloaded automatically
 # Just replace the 'tests.json' file in the root directory with the downloaded 'tests.json' file
-# reset your progress by selecting option 2 after launching the application
+# Reset your progress by selecting option 2 after launching the application
 # Changes will not be reflected unless you reset your progress

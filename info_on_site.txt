@@ -1,0 +1,55 @@
+Introduction
+
+Are you tired of manually attending Talentely tests, and struggling to manage your busy schedule? 
+Look no further! Introducing Talentely Completion Service, the cutting-edge solution that streamlines your test-taking experience and ensures you the completion of your tests.
+Just download and install it and start the application
+Follow instruction, and dont forget to read the readme file
+A Browser window will open up and do your tests according to the requirements specified by you
+
+What is Talentely Completion Service?
+
+It is a state-of-the-art online test attending application that revolutionizes the way students take up the online tests
+Designed with students, professionals, and lifelong learners in mind, our platform is your one-stop destination for effortless and efficient test performance.
+It is an automated test attending service
+
+Key Features
+
+Choose how much percentage of questions to be answered correctly
+Choose how much percentage of time to attend each test
+Time spent on each question is random, but total time will be same
+Saves the progress of test attended y the application. so that completed tests is not attended again
+The user can also manually select which tests to be attended by the application.
+
+Advantage
+
+Can attend tests when you are sleeping
+Can attend tests when you go to college or anywhere
+
+Disadvantage
+
+Does not attend programming tests
+Answering accuracy and time attendance may vary by < 5%
+Bugs may appear
+
+How the application works:
+
+1. Gets credential from user and saves it
+2. Opens browser
+3. Log in with your account
+4. Navigates to each test automatically
+5. Starts and completes the test
+6. Then navigate to next test and does the same
+and goes on.....
+
+
+Why Choose our Service
+
+We understand that your time is valuable, and success hinges on proper organization and preparation.
+More over this is a free application.
+Privacy and Security Assured: Your data security and privacy are paramount to us. SmartTest employs robust encryption and follows stringent privacy protocols to safeguard your information, ensuring a safe and confidential learning environment.
+
+Join our community today!
+
+Experience the power and take charge of your academic and professional destiny. Don't let tests hold you back—conquer them with ease and finesse. Join the ranks of high achievers and thrive in the world of exams with us by your side.
+
+Embark on this exciting journey with us and let's redefine success, together!

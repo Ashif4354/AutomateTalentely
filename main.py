@@ -15,6 +15,7 @@ from logger import logger
 
 class Talentely:
     def __init__(self, email = '', password = 'vidhai', answer_percentage = 100, time_percentage = 100, attend_c_test = False):
+        self.version = 7.2
         self.url = 'https://system.talentely.com/login'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
         self.browser  = None        
@@ -47,7 +48,7 @@ class Talentely:
         if path.exists(path.join(self.AT_folder_path, 'Configuration.json')):
             with open(f'{self.AT_folder_path}/Configuration.json', 'r') as file:
                 conf = load(file)
-            conf['version'] = 7.2
+            conf['version'] = self.version
 
             with open(self.AT_folder_path + '/Configuration.json', 'w') as json_file:
                 dump(conf, json_file)
@@ -541,7 +542,7 @@ def main():
 
         with open(AT_folder_path + '/TestStatus.json', 'w') as json_file:
             dump(test_status, json_file)    
-
+    print('visit automatetalentely.netlify.app')
     print('\nDEVELOPED BY The DG')
     print("READ THE '_README.txt' file before using this application for ease of access" )
 
