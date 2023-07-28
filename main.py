@@ -32,27 +32,6 @@ class Talentely:
         self.create_cofiguration_files()
         self.check_update()
 
-    def create_cofiguration_files(self):
-
-        if not path.exists(self.AT_folder_path):
-            makedirs(self.AT_folder_path)
-
-        if not path.exists(path.join(self.AT_folder_path, 'TestStatus.json')):
-            with open(f'{self.AT_folder_path}/TestStatus.json', 'w') as file:
-                file.write('{"COMPLETED": [], "INCOMPLETE": [], "ERROR": []}')
-
-        if not path.exists(path.join(self.AT_folder_path, 'Configuration.json')):
-            with open(f'{self.AT_folder_path}/Configuration.json', 'w') as file:
-                file.write('{"email": "", "password": "", "answer-percentage": 100, "time-percentage": 100, "attend-c-test": false, "version": ""}')
-        
-        if path.exists(path.join(self.AT_folder_path, 'Configuration.json')):
-            with open(f'{self.AT_folder_path}/Configuration.json', 'r') as file:
-                conf = load(file)
-            conf['version'] = self.version
-
-            with open(self.AT_folder_path + '/Configuration.json', 'w') as json_file:
-                dump(conf, json_file)
-
     def check_update(self):
         response = get('https://tcsversion.netlify.app')
         new_version = loads(response.text)['version']
@@ -533,6 +512,27 @@ class Talentely:
 def main():
     AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
+    def create_cofiguration_files(self):
+
+        if not path.exists(AT_folder_path):
+            makedirs(AT_folder_path)
+
+        if not path.exists(path.join(AT_folder_path, 'TestStatus.json')):
+            with open(f'{AT_folder_path}/TestStatus.json', 'w') as file:
+                file.write('{"COMPLETED": [], "INCOMPLETE": [], "ERROR": []}')
+
+        if not path.exists(path.join(AT_folder_path, 'Configuration.json')):
+            with open(f'{AT_folder_path}/Configuration.json', 'w') as file:
+                file.write('{"email": "", "password": "", "answer-percentage": 100, "time-percentage": 100, "attend-c-test": false, "version": ""}')
+        
+        if path.exists(path.join(AT_folder_path, 'Configuration.json')):
+            with open(f'{AT_folder_path}/Configuration.json', 'r') as file:
+                conf = load(file)
+            conf['version'] = self.version
+
+            with open(AT_folder_path + '/Configuration.json', 'w') as json_file:
+                dump(conf, json_file)
+
     def reset_status():
         test_status = {
             'COMPLETED' : [],
@@ -542,7 +542,7 @@ def main():
 
         with open(AT_folder_path + '/TestStatus.json', 'w') as json_file:
             dump(test_status, json_file)    
-    
+    create_cofiguration_files()
     print('\nDEVELOPED BY The DG')
     print("READ THE '_README.txt' file before using this application for ease of access" )
     print('\nvisit automatetalentely.netlify.app for more..')
