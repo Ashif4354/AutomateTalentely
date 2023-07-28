@@ -260,7 +260,7 @@ class Talentely:
             self.end_test(test, test_time[0], answered = True)
 
         except Exception as exception:
-            #print("EXCEPTION", exception)
+            print("EXCEPTION", exception)
             self.end_test2(test)       
         
     
@@ -316,7 +316,7 @@ class Talentely:
 
             random_time  = randint(1, int(equal_time * (1 / 4)))
 
-            if even:
+            if i < loop_count - 1:
                 time_for_each_question.append(equal_time + random_time)
                 time_for_each_question.append(equal_time - random_time)
             else:
@@ -397,7 +397,7 @@ class Talentely:
 
                     
                 except Exception as exception:
-                    #print(exception)
+                    #print('EXCEPTION 2', exception)
                     pass
                 
             
