@@ -542,9 +542,10 @@ def main():
 
         with open(AT_folder_path + '/TestStatus.json', 'w') as json_file:
             dump(test_status, json_file)    
-    print('visit automatetalentely.netlify.app')
+    
     print('\nDEVELOPED BY The DG')
     print("READ THE '_README.txt' file before using this application for ease of access" )
+    print('\nvisit automatetalentely.netlify.app for more..')
 
     with open(AT_folder_path + '/Configuration.json', 'r') as file:
             configuration = load(file)

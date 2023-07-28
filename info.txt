@@ -1,4 +1,4 @@
-TCS - Talentely Completion Service
+Talentely Completion Service
 
 This application is developed by DG
 DONT SHARE this application without DG's permission
