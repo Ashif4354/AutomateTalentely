@@ -3,6 +3,13 @@ TCS - Talentely Completion Service
 This application is developed by DG
 DONT SHARE this application without DG's permission
 
+############################################################
+Note - if you are updating to newer version, make sure you have backed up the previous versions TestStatus.json and Student.json file.
+After installing you need to replace the new TestStatus.json and Student.json file with the old one.
+Else you will lose progress
+After Installing run the program as administrator always
+############################################################
+
 This software is meant for students of KCG College of Technology ONLY
 
 Developer / Alpha Tester - DQILKT

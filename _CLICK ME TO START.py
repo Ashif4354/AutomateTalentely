@@ -319,12 +319,11 @@ class Talentely:
             if i < loop_count - 1:
                 time_for_each_question.append(equal_time + random_time)
                 time_for_each_question.append(equal_time - random_time)
-            else:
-                time_for_each_question.append(equal_time)        
-
-        sum = 0
-        for i in time_for_each_question:
-            sum += i
+            if i == loop_count - 1 and not even:
+                time_for_each_question.append(equal_time)   
+            if i == loop_count - 1 and even:
+                time_for_each_question.append(equal_time + random_time)
+                time_for_each_question.append(equal_time - random_time)
         
         shuffle(time_for_each_question)
         return time_for_each_question

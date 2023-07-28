@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Automate Talentely"
-#define MyAppVersion "7.0"
+#define MyAppVersion "7.1"
 #define MyAppPublisher "DG"
 #define MyAppExeName "_CLICK ME TO START.exe"
 
@@ -35,18 +35,18 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\_README.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\Answers.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\Ctests.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\Qtests.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\Rtests.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\select_tests.html"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\Student.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\styles.css"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\tests.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\TestStatus.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG v7.0\Vtests.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\_README.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\Answers.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\Ctests.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\Qtests.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\Rtests.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\select_tests.html"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\Student.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\styles.css"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\tests.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\TestStatus.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by DG\Vtests.json"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
