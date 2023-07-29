@@ -1,3 +1,7 @@
 Thankyou for installing
 Use at your own Risk 
 Share your happiness with your friends
+
+Never Expose the developers
+
+COMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access

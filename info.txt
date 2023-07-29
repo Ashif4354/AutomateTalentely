@@ -19,4 +19,4 @@ Idea providers
 - DBIBLWLW
 - IDWMRT
 
-The above names are encrypted using playfair cipher , and if you find the key used while encrypting it, you get find our names,  and if you come to the developer and tell the correct key value, he will give you a small gift
+The above names are encrypted using playfair cipher , and if you find the key used while encrypting it, you get our names,  and if you come to the developer and tell the correct key, he will give you a small gift

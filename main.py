@@ -16,7 +16,7 @@ from logger import logger
 class AT:
 
     def __init__(self):
-        self.version = '7.8'
+        self.version = '7.9'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -112,6 +112,11 @@ class Talentely:
         for test in self.tests:
             if not test in test_status['COMPLETED'] and test not in test_status['INCOMPLETE'] and test not in test_status['ERROR']:
                 test_status['INCOMPLETE'].append(test)
+        
+        if not self.attend_c_test:
+            for test in incomplete_tests:
+                if test[0] == 'c':
+                    incomplete_tests.remove(test)
 
         self.incomplete_tests = test_status['INCOMPLETE']
 
@@ -572,7 +577,7 @@ def main():
 
     c_test_attend_status = 'ON' if configuration['attend-c-test'] else 'OFF'
 
-    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n5. Set Completion time percentage\n6. Toggle On/Off to Attend c programming test(without answers)(currently {})\n7. Manually select which tests to attend\n\nYOUR OPTION : ".format(c_test_attend_status))
+    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n5. Set Completion time percentage\n6. Toggle On/Off to Attend c programming test(without answers)(currently {})\n7. Manually select which tests to attend\n8. Show test status\n\nYOUR OPTION : ".format(c_test_attend_status))
     
     if option == '1':
         if configuration['email'] == '':
@@ -692,6 +697,13 @@ def main():
         browser = webdriver.Edge()
         browser.get(path.join(getcwd(), 'select_tests.html'))
         input()
+    
+    elif option == '8':
+        with open(AT_folder_path + '/TestStatus.json', 'r') as file:
+            TestStatus = load(file)
+
+        system('cls')
+        print('Tests Completed : {}\nTests Remaining : {}\nTests Error : {}'.format(len(TestStatus['COMPLETED']), len(TestStatus['INCOMPLETE']), len(TestStatus['ERROR']), ))
 
     else:
         print('ENTER VALID OPTION')
