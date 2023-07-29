@@ -16,7 +16,7 @@ from logger import logger
 class AT:
 
     def __init__(self):
-        self.version = '7.9'
+        self.version = '7.9.1'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -114,9 +114,11 @@ class Talentely:
                 test_status['INCOMPLETE'].append(test)
         
         if not self.attend_c_test:
-            for test in incomplete_tests:
+            inc_tests = test_status['INCOMPLETE'].copy()
+            for test in inc_tests:
                 if test[0] == 'c':
-                    incomplete_tests.remove(test)
+                    print(test)
+                    test_status['INCOMPLETE'].remove(test)
 
         self.incomplete_tests = test_status['INCOMPLETE']
 
