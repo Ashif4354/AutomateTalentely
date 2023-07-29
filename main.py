@@ -117,7 +117,6 @@ class Talentely:
             inc_tests = test_status['INCOMPLETE'].copy()
             for test in inc_tests:
                 if test[0] == 'c':
-                    print(test)
                     test_status['INCOMPLETE'].remove(test)
 
         self.incomplete_tests = test_status['INCOMPLETE']
