@@ -16,7 +16,7 @@ from logger import logger
 class AT:
 
     def __init__(self):
-        self.version = 7.3
+        self.version = 7.4
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -56,8 +56,8 @@ class AT:
             label.pack()
             label = Label(alert_box, text="Download now at ")
             label.pack()
-            label = Label(alert_box, text='url', fg="blue", cursor="hand2")
-            label.bind("<Button-1>", lambda event: open_new('google.com'))
+            label = Label(alert_box, text='https://automatetalentely.netlify.app/', fg="blue", cursor="hand2")
+            label.bind("<Button-1>", lambda event: open_new('https://automatetalentely.netlify.app/'))
             label.pack()
             button = Button(alert_box, text="OK", command=alert_box.destroy)
             button.config(width=10, height=1)
@@ -494,6 +494,7 @@ class Talentely:
             next_button.click()
         
     def end_test(self, test, answered):
+        sleep(3)
         try:
             end_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]')
         except:
@@ -518,6 +519,7 @@ class Talentely:
 
 
     def end_test2(self,test):
+        sleep(3)
         
         try:
             button = self.browser.find_element(By.XPATH, '/html/body/div[4]/div[3]/div/div[3]/button[2]')
@@ -530,11 +532,7 @@ class Talentely:
         self.logger.log_test_error(len(self.get_json('TestStatus')['COMPLETED']))
         self.update_test_status(test, False)
 
-def main():
-    AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
-    at = AT()
-    at.create_cofiguration_files()
-    at.check_update()
+def main():  
 
     def reset_status():
         test_status = {
@@ -676,6 +674,12 @@ def main():
         print('ENTER VALID OPTION')
 
 if __name__ == '__main__':
+
+    AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
+    at = AT()
+    at.create_cofiguration_files()
+    at.check_update()
+
     while True:
         main()
         
