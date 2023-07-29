@@ -16,7 +16,7 @@ from logger import logger
 class AT:
 
     def __init__(self):
-        self.version = '7.7'
+        self.version = '7.7.1'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
