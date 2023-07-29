@@ -16,7 +16,7 @@ from logger import logger
 class AT:
 
     def __init__(self):
-        self.version = '7.7.1'
+        self.version = '7.8'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -41,7 +41,11 @@ class AT:
                 dump(conf, json_file)
 
     def check_update(self):
-        response = get('https://tcsversion.netlify.app')
+        try:
+            response = get('https://tcsversion.netlify.app')
+        except Exception:
+            return
+
         new_version = loads(response.text)['version']
 
         with open(f'{self.AT_folder_path}/Configuration.json', 'r') as file:
@@ -134,8 +138,6 @@ class Talentely:
 
         incomplete_tests = self.get_json('TestStatus')['INCOMPLETE']
 
-        #for test in incomplete_tests:
-
         if not self.attend_c_test:
             for test in incomplete_tests:
                 if test[0] == 'c':
@@ -151,6 +153,9 @@ class Talentely:
         
 
     def navigate_home_page(self, test):
+
+        self.browser.execute_script("window.scrollTo(0, 200);")
+
         try:
             if test[0] == 'a':
                 aptitude_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/button')
@@ -168,12 +173,17 @@ class Talentely:
                 
             else:
                 pass
-        except Exception as exception:
+        except Exception as exception:#log needed        
             print('\nSOME ERROR OCCURED', exception)
+            self.logger.report_exception(test, 'Navigate_home_page', exception)
             input('NOTE DOWN THE ABOVE ERROR and ping DG')
+            
             
     
     def navigate_aptitude(self, test):
+        
+        self.browser.execute_script("window.scrollTo(0, 200);")
+
         if test[1] == 'q':
             quantitative_button = self.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a')
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', quantitative_button)
@@ -273,8 +283,14 @@ class Talentely:
     def find_and_do_test(self, test):
         test_xpath = self.get_test_xpath(test)
         
-        test_button = self.browser.find_element(By.XPATH, test_xpath)
-        self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button)
+        try:
+            test_button = self.browser.find_element(By.XPATH, test_xpath)
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button)
+        except:
+            self.browser.execute_script("window.scrollTo(0, 200);")
+            test_button = self.browser.find_element(By.XPATH, test_xpath)
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button)
+
         test_button.click()
         sleep(2)
 
@@ -324,7 +340,8 @@ class Talentely:
 
             self.end_test(test, answered = True)
 
-        except Exception as exception:
+        except Exception as exception: #log needed
+            self.logger.report_exception(test, 'find_and_do_test', exception)
             #print("EXCEPTION", exception)
             self.end_test2(test)       
         
@@ -358,9 +375,9 @@ class Talentely:
                 questions = number - 1
                 break
             number += 1
-        sleep(1)
-        x_button = self.browser.find_element(By.XPATH, '//*[@id="drawer-container"]/div[2]/div/div[1]/div[1]/button')
-        x_button.click()
+        sleep(.5)
+        #x_button = self.browser.find_element(By.XPATH, '//*[@id="drawer-container"]/div[2]/div/div[1]/div[1]/button')
+        #x_button.click()
         return questions
 
     def get_random_time(self, test_time, no_of_questions):
@@ -433,7 +450,8 @@ class Talentely:
             xpaths = [
                 '//*[@id="drawer-container"]/div/div/div[1]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
                 '//*[@id="drawer-container"]/div[1]/div/div[1]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
-                '//*[@id="drawer-container"]/div[1]/div/div[3]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p'
+                '//*[@id="drawer-container"]/div[1]/div/div[3]/div[1]/div[3]/fieldset/div/label[{}]/span[2]/p',
+                '//*[@id="drawer-container"]/div[1]/div/div[2]/div/fieldset/div/label[{}]/span[2]/p'
             ]
 
             for xpath in xpaths:
@@ -546,7 +564,7 @@ def main():
             dump(test_status, json_file)  
 
     print('\nDEVELOPED BY The DG')
-    print("READ THE '_README.txt' file before using this application for ease of access" )
+    print("COMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access" )
     print('\nvisit automatetalentely.netlify.app for more..')
 
     with open(AT_folder_path + '/Configuration.json', 'r') as file:
@@ -582,7 +600,8 @@ def main():
         t = Talentely(configuration['email'], configuration['password'], configuration['answer-percentage'], configuration['time-percentage'], configuration['attend-c-test'])       
         try:
             t.login()
-        except Exception as exception:
+        except Exception as exception: #log needed
+            self.logger.report_exception(test, 'main', exception)
             print('\nSome Error Occured at login')
 
         print('\nAutomation Started\n')

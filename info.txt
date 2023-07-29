@@ -3,7 +3,7 @@ Talentely Completion Service
 This application is developed by DG
 DONT SHARE this application without DG's permission
 
-Run the program as administrator always
+Run the program as ADMINISTRATOR always
 
 This software is meant for students of KCG College of Technology ONLY
 
