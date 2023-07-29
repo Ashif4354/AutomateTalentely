@@ -325,7 +325,7 @@ class Talentely:
             self.end_test(test, answered = True)
 
         except Exception as exception:
-            print("EXCEPTION", exception)
+            #print("EXCEPTION", exception)
             self.end_test2(test)       
         
     
