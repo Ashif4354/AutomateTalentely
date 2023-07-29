@@ -2,7 +2,7 @@
 2. change version in site/index.html
 3. convert to exe using autopytoexe
 4. rename main.exe to Automate_Talentely.exe and replace in output folder 
-5. change version in TCS.iss , build using inno setup
+5. change version in TCS.iss , compile using inno setup
 
 6. commit
 
@@ -11,5 +11,5 @@
 
 9. commit
 
-10. update tcsversion page at last
+10. update tcsversion page at last 
 

@@ -16,7 +16,7 @@ from logger import logger
 class AT:
 
     def __init__(self):
-        self.version = '7.6'
+        self.version = '7.7'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -358,7 +358,9 @@ class Talentely:
                 questions = number - 1
                 break
             number += 1
-
+        sleep(1)
+        x_button = self.browser.find_element(By.XPATH, '//*[@id="drawer-container"]/div[2]/div/div[1]/div[1]/button')
+        x_button.click()
         return questions
 
     def get_random_time(self, test_time, no_of_questions):
@@ -420,11 +422,11 @@ class Talentely:
             question_num = randint(1, no_of_questions)
 
             if question_num not in wrong_answers:
-                wrong_answers.append(question_num)        
+                wrong_answers.append(question_num)    
 
         for question in range(1, no_of_questions + 1):
             sleep(time_for_each_question[question - 1])
-            #sleep(5)
+            #sleep(2)
             #start = perf_counter()
             answer = answers[str(question)].lower()        
                 
