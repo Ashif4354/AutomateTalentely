@@ -54,7 +54,7 @@ class AT:
             alert_box.geometry("300x100")
             label = Label(alert_box, text="A new version of the app is available")
             label.pack()
-            label = Label(alert_box, text="Download now at ")
+            label = Label(alert_box, text=f"Download v{new_version} now at ")
             label.pack()
             label = Label(alert_box, text='https://automatetalentely.netlify.app/', fg="blue", cursor="hand2")
             label.bind("<Button-1>", lambda event: open_new('https://automatetalentely.netlify.app/'))

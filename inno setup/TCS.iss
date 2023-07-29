@@ -2,15 +2,15 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Automate Talentely"
-#define MyAppVersion "7.4"
+#define MyAppVersion "7.5"
 #define MyAppPublisher "DG"
 #define MyAppURL "https://automatetalentely.netlify.app/"
-#define MyAppExeName "Automate Talentely.exe"
+#define MyAppExeName "Automate_Talentely.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{3BAEF21A-D014-47F2-B5FB-03CBCAE95EC9}
+AppId={{1B88D635-C828-4F5D-B05A-395FD5E4822F}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -19,13 +19,14 @@ AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
-DisableProgramGroupPage=yes
+DefaultGroupName={#MyAppName}
+AllowNoIcons=yes
 LicenseFile=D:\PROGRAMMING\PROJECTS\AutomateTalentely\licence.txt
 InfoBeforeFile=D:\PROGRAMMING\PROJECTS\AutomateTalentely\info.txt
 InfoAfterFile=D:\PROGRAMMING\PROJECTS\AutomateTalentely\after_info.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputBaseFilename=Automate Talentely
+OutputBaseFilename=Automate_Talentely
 SetupIconFile=D:\PROGRAMMING\PROJECTS\AutomateTalentely\talentelyicon.ico
 Compression=lzma
 SolidCompression=yes
@@ -51,7 +52,9 @@ Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\Automate Talentely by 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
