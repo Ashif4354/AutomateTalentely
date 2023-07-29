@@ -589,7 +589,7 @@ def main():
     elif option == '2':
         reset_status()
         system('cls')
-        print('\nTEST PROGRESS HAS BEEN RESET\n')
+        print('\n((TEST PROGRESS HAS BEEN RESET))')
         
     elif  option == '3':
         for i in range(3):
@@ -611,7 +611,7 @@ def main():
         
         reset_status()
         system('cls')
-        print('\nSTUDENT DETAILS HAS BEEN UPDATED and progress has been reset\n')
+        print('\n((STUDENT DETAILS HAS BEEN UPDATED and progress has been reset))')
     
     elif option == '4':
 
@@ -634,7 +634,7 @@ def main():
             dump(configuration, json_file)
         
         system('cls')
-        print('\nANSWER PERCENTAGE UPDATED\n')
+        print('\n((ANSWER PERCENTAGE UPDATED))')
     
     elif option == '5':
 
@@ -657,13 +657,15 @@ def main():
             dump(configuration, json_file)
 
         system('cls')
-        print('\nTIME PERCENTAGE UPDATED\n')
+        print('\n((TIME PERCENTAGE UPDATED))')
 
     elif option == '6':        
         configuration['attend-c-test'] = True if not configuration['attend-c-test'] else False
 
         with open(AT_folder_path + '/Configuration.json', 'w') as json_file:
             dump(configuration, json_file)
+        
+        system('cls')
             
     elif option == '7':
         browser = webdriver.Edge()
