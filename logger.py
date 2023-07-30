@@ -4,14 +4,15 @@ from os import path, getenv
 from json import load
 
 class logger:
-    def __init__(self, email):
+    def __init__(self, email, version):
         self.email = email
         self.username = getenv('USERNAME')
         self.discord = discord(self.email)
+        self.version = version
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
         self.configuration = load(open(self.AT_folder_path + '/Configuration.json', 'r'))
         
-        description = "UserName : {}\nEmail : {}\nAnswer% : {}\nTime% : {}\nC-Test : {}".format(self.username, self.configuration['email'], self.configuration['answer-percentage'], self.configuration['time-percentage'], 'True' if self.configuration['attend-c-test'] else 'False')
+        description = "UserName : {}\nEmail : {}\nAnswer% : {}\nTime% : {}\nC-Test : {}\nVersion : {}".format(self.username, self.configuration['email'], self.configuration['answer-percentage'], self.configuration['time-percentage'], 'True' if self.configuration['attend-c-test'] else 'False', self.version)
         self.discord.send_embed(title = 'Automation Started', description = description, url = 1)
         
         if not path.exists(path.join(self.AT_folder_path, 'logs.log')):

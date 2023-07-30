@@ -16,7 +16,7 @@ from logger import logger
 class AT:
 
     def __init__(self):
-        self.version = '7.9.1'
+        self.version = '7.10'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -82,7 +82,7 @@ class Talentely:
         self.answer_percentage = answer_percentage
         self.time_percentage = time_percentage
         self.attend_c_test = attend_c_test
-        self.logger = logger(self.email)
+        self.logger = logger(self.email, AT().version)
 
     def open_browser(self, maximize = True):
         self.browser = webdriver.Edge()
@@ -389,7 +389,7 @@ class Talentely:
     def get_random_time(self, test_time, no_of_questions):
         time_for_each_question = []
 
-        total_calculated_time = (test_time * self.time_percentage / 100) - (no_of_questions)
+        total_calculated_time = (test_time * self.time_percentage / 100) - (no_of_questions * 2)
 
         if total_calculated_time > test_time - 30:
             total_calculated_time = test_time - 30
@@ -465,12 +465,22 @@ class Talentely:
                 try:
                     for i in range(1,7):
                         xpath_ = xpath.format(i)
-                        option = self.browser.find_element(By.XPATH, xpath_)
-                        self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
+                        try:
+                            option = self.browser.find_element(By.XPATH, xpath_)
+                            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
+                        except:
+                            warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
+                            warning_ok_button.click()
+                            sleep(.5)
+
+                            option = self.browser.find_element(By.XPATH, xpath_)
+                            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
+
                         text = option.text.lower()
                         if  (text in answer or answer in text or text == answer) or answer == '':
                             if question not in wrong_answers:
                                 option.click()
+                                sleep(1)
                                 break
                             else:
                                 option_numbers = [1, 2, 3, 4] 
@@ -483,6 +493,7 @@ class Talentely:
                                 option = self.browser.find_element(By.XPATH, xpath_)
                                 self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
                                 option.click()
+                                sleep(1)
                                 break
                         else:
                             continue
@@ -524,7 +535,12 @@ class Talentely:
         try:
             end_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]')
         except:
-            self.end_test2(test) 
+            try:
+                warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
+                warning_ok_button.click()
+                sleep(.5)
+            except:
+                self.end_test2(test) 
 
         end_button.click()
         sleep(1)        
