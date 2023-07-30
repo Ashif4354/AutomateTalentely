@@ -10,13 +10,12 @@ from random import randint, choice, shuffle
 from tkinter import Tk, Label, Button
 from winsound import MessageBeep, MB_ICONHAND
 from webbrowser import open_new
-
 from logger import logger
 
 class AT:
 
     def __init__(self):
-        self.version = '7.10'
+        self.version = '7.11'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -228,8 +227,12 @@ class Talentely:
             with open(f'{self.AT_folder_path}/{file}.json', 'r') as json_file:
                 json_ = load(json_file)
         except:
-            with open(f'{file}.json', 'r') as json_file:
-                json_ = load(json_file)
+            try:
+                with open(f'{file}.json', 'r') as json_file:
+                    json_ = load(json_file)
+            except:
+                with open(f'{getcwd()}\jsonFiles\{file}.json', 'r') as json_file:
+                    json_ = load(json_file)
 
         return json_
 
@@ -361,8 +364,10 @@ class Talentely:
     def get_answers(self, test_name):
         answers = {}
 
-        with open('Answers.json', 'r') as json_file:
-            answers = load(json_file)[test_name]
+        answers = self.get_json('Answers')[test_name]
+
+        # with open('Answers.json', 'r') as json_file:
+        #     answers = load(json_file)[test_name]
         
         return answers
 
@@ -585,10 +590,6 @@ def main():
         with open(AT_folder_path + '/TestStatus.json', 'w') as json_file:
             dump(test_status, json_file)  
 
-    print('\nDEVELOPED BY The DG')
-    print("COMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access" )
-    print('\nvisit automatetalentely.netlify.app for more..')
-
     with open(AT_folder_path + '/Configuration.json', 'r') as file:
             configuration = load(file)
 
@@ -712,7 +713,10 @@ def main():
             
     elif option == '7':
         browser = webdriver.Edge()
-        browser.get(path.join(getcwd(), 'select_tests.html'))
+        try:
+            browser.get(path.join(getcwd() + '\selectTests', 'select_tests.html'))
+        except:
+            browser.get(path.join(getcwd(), 'select_tests.html'))
         input()
     
     elif option == '8':
@@ -731,6 +735,10 @@ if __name__ == '__main__':
     at = AT()
     at.create_cofiguration_files()
     at.check_update()
+
+    print('\nDEVELOPED BY The DG')
+    print("COMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access" )
+    print('\nvisit automatetalentely.netlify.app for more..')
 
     while True:
         main()
