@@ -292,10 +292,11 @@ class Talentely:
         return (total_time, test_time)
 
     def click_test(self, test):
+        WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, f'stepper1')))
         
         count = 1
         while True:
-            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, f'stepper{count}')))
+            
             test_button_2 = self.browser.find_element(By.ID, f'stepper{count}')
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button_2)
 
@@ -322,7 +323,8 @@ class Talentely:
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button)
 
         test_button.click()
-
+        #sleep(2)
+        
         index = self.click_test(test)
 
         test_name = test[4]
