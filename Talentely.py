@@ -352,8 +352,10 @@ class Talentely:
             WebDriverWait(self.browser, 2).until(EC.visibility_of_element_located((By.XPATH, submit_button_xpath)))
             submit_button = self.browser.find_element(By.XPATH, submit_button_xpath)
             submit_button.click()
+            sleep(2)
             
             proceed_button_xpath = '/html/body/div[3]/div[3]/div/div[3]/button[2]'
+            #
             WebDriverWait(self.browser, 2).until(EC.visibility_of_element_located((By.XPATH, proceed_button_xpath)))
             proceed_button = self.browser.find_element(By.XPATH, proceed_button_xpath) 
             proceed_button.click()
@@ -474,8 +476,8 @@ class Talentely:
                 wrong_answers.append(question_num)    
 
         for question in range(1, no_of_questions + 1):
-            sleep(time_for_each_question[question - 1])
-            #sleep(1)
+            #sleep(time_for_each_question[question - 1])
+            sleep(1)
             answer = answers[str(question)].lower()        
                 
             xpaths = [
@@ -581,17 +583,20 @@ class Talentely:
         WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, submit_button_xpath)))
         submit_button = self.browser.find_element(By.XPATH, submit_button_xpath)
         submit_button.click()
-        try:
-            cancel_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button'
-            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, cancel_button_xpath)))
+        sleep(3)
+        
+        #input()
+        try:                      
+            cancel_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button[2]'
+            #WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, cancel_button_xpath)))
             cancel_button = self.browser.find_element(By.XPATH, cancel_button_xpath)
             cancel_button.click()
         except:
-            cancel_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button[2]'
-            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, cancel_button_xpath)))
+            cancel_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button'
+            #WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, cancel_button_xpath)))
             cancel_button = self.browser.find_element(By.XPATH, cancel_button_xpath)
             cancel_button.click()
-
+        
         if answered:
             self.update_test_status(test, True)
             self.logger.log_end_test(len(self.get_json('TestStatus')['COMPLETED']))            
