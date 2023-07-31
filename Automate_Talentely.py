@@ -1,9 +1,7 @@
 from json import dump, load, loads
 from os import getcwd, path, system, getenv, makedirs
 from requests import get
-from tkinter import Tk, Label, Button
-from winsound import MessageBeep, MB_ICONHAND
-from webbrowser import open_new
+
 
 from Talentely import Talentely, AT
 

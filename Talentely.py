@@ -8,6 +8,10 @@ from json import dump, load, loads
 from os import getcwd, system, getenv, path
 from random import randint, choice, shuffle
 from logger import logger
+from requests import get
+from tkinter import Tk, Label, Button
+from winsound import MessageBeep, MB_ICONHAND
+from webbrowser import open_new
 
 
 class AT:
@@ -41,6 +45,7 @@ class AT:
         try:
             response = get('https://tcsversion.netlify.app')
         except Exception:
+            print(1)
             return
 
         new_version = loads(response.text)['version']
