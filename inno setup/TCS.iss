@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Automate Talentely"
-#define MyAppVersion "7.11"
+#define MyAppVersion "8.0"
 #define MyAppPublisher "DG"
 #define MyAppURL "automatetalentely.netlify.app"
 #define MyAppExeName "Automate_Talentely.exe"
