@@ -472,8 +472,8 @@ class Talentely:
                 wrong_answers.append(question_num)    
 
         for question in range(1, no_of_questions + 1):
-            #sleep(time_for_each_question[question - 1])
-            sleep(1)
+            sleep(time_for_each_question[question - 1])
+            #sleep(1)
             answer = answers[str(question)].lower()        
                 
             xpaths = [
