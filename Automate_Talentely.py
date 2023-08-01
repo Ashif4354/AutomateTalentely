@@ -149,7 +149,7 @@ def main():
             TestStatus = load(file)
 
         system('cls')
-        print('Tests Completed : {}\nTests Remaining : {}\nTests Error : {}'.format(len(TestStatus['COMPLETED']), len(TestStatus['INCOMPLETE']), len(TestStatus['ERROR']), ))
+        print('/nTests Completed : {}\nTests Remaining : {}\nTests Error : {}'.format(len(TestStatus['COMPLETED']), len(TestStatus['INCOMPLETE']), len(TestStatus['ERROR']), ))
 
     else:
         system('cls')
