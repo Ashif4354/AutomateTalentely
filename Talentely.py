@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.1'
+        self.version = '8.2'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -317,7 +317,6 @@ class Talentely:
             test_button = self.browser.find_element(By.XPATH, test_xpath)
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button)
         except:
-            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, test_xpath)))
             self.browser.execute_script("window.scrollTo(0, 200);")
             test_button = self.browser.find_element(By.XPATH, test_xpath)
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button)
@@ -352,11 +351,9 @@ class Talentely:
             WebDriverWait(self.browser, 2).until(EC.visibility_of_element_located((By.XPATH, submit_button_xpath)))
             submit_button = self.browser.find_element(By.XPATH, submit_button_xpath)
             submit_button.click()
-            sleep(2)
+            sleep(4)
             
             proceed_button_xpath = '/html/body/div[3]/div[3]/div/div[3]/button[2]'
-            #
-            WebDriverWait(self.browser, 2).until(EC.visibility_of_element_located((By.XPATH, proceed_button_xpath)))
             proceed_button = self.browser.find_element(By.XPATH, proceed_button_xpath) 
             proceed_button.click()
         except Exception as e:
@@ -364,7 +361,7 @@ class Talentely:
 
         try:
             end_button_xpath = '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]'
-            WebDriverWait(self.browser, 3).until(EC.visibility_of_element_located((By.XPATH, end_button_xpath)))
+            WebDriverWait(self.browser, 4).until(EC.visibility_of_element_located((By.XPATH, end_button_xpath)))
             
             try:
                 answers = self.get_answers(test_name)
@@ -397,7 +394,6 @@ class Talentely:
         questions = 0
         
         three_line_button_xpath = '//*[@id="drawer-container"]/div[1]/button'
-        WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, three_line_button_xpath)))
         three_line_button = self.browser.find_element(By.XPATH, three_line_button_xpath)
         three_line_button.click()
 
@@ -476,8 +472,8 @@ class Talentely:
                 wrong_answers.append(question_num)    
 
         for question in range(1, no_of_questions + 1):
-            sleep(time_for_each_question[question - 1])
-            #sleep(1)
+            #sleep(time_for_each_question[question - 1])
+            sleep(1)
             answer = answers[str(question)].lower()        
                 
             xpaths = [
@@ -498,7 +494,7 @@ class Talentely:
                         except:
                             warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
                             warning_ok_button.click()
-                            WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, xpath_)))
+                            sleep(1)
                             option = self.browser.find_element(By.XPATH, xpath_)
                             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
 
@@ -537,9 +533,9 @@ class Talentely:
                 except:
                     warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
                     warning_ok_button.click()
+                    sleep(1)
 
                     next_button_xpath = '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]'
-                    WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, next_button_xpath)))
                     next_button = self.browser.find_element(By.XPATH, next_button_xpath)
                     next_button.click()
 
@@ -559,16 +555,15 @@ class Talentely:
                 except:
                     warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
                     warning_ok_button.click()
+                    sleep(1)
 
                     next_button_xpath = '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]'
-                    WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, next_button_xpath)))
                     next_button = self.browser.find_element(By.XPATH, next_button_xpath)
                     next_button.click()
         
     def end_test(self, test, answered):
         try:
             end_button_xpath = '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]'
-            WebDriverWait(self.browser, 4).until(EC.visibility_of_element_located((By.XPATH, end_button_xpath)))
             end_button = self.browser.find_element(By.XPATH, end_button_xpath)
         except:
             try:
@@ -583,19 +578,9 @@ class Talentely:
         WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, submit_button_xpath)))
         submit_button = self.browser.find_element(By.XPATH, submit_button_xpath)
         submit_button.click()
-        sleep(3)
+        sleep(2)
         
-        #input()
-        try:                      
-            cancel_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button[2]'
-            #WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, cancel_button_xpath)))
-            cancel_button = self.browser.find_element(By.XPATH, cancel_button_xpath)
-            cancel_button.click()
-        except:
-            cancel_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button'
-            #WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, cancel_button_xpath)))
-            cancel_button = self.browser.find_element(By.XPATH, cancel_button_xpath)
-            cancel_button.click()
+        self.browser.get('https://system.talentely.com/academy/courses')
         
         if answered:
             self.update_test_status(test, True)
@@ -606,16 +591,7 @@ class Talentely:
 
     def end_test2(self,test):
         
-        try:
-            button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button[2]'
-            WebDriverWait(self.browser, 3).until(EC.visibility_of_element_located((By.XPATH, button_xpath)))
-            button = self.browser.find_element(By.XPATH, button_xpath)
-            button.click()
-        except:
-            ok_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button[1]'
-            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, ok_button_xpath)))
-            ok_button = self.browser.find_element(By.XPATH, ok_button_xpath)
-            ok_button.click()
+        self.browser.get('https://system.talentely.com/academy/courses')
 
         self.logger.log_test_error(len(self.get_json('TestStatus')['COMPLETED']))
         self.update_test_status(test, False)
