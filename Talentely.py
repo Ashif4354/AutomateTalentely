@@ -561,8 +561,7 @@ class Talentely:
                     next_button = self.browser.find_element(By.XPATH, next_button_xpath)
                     next_button.click()
         
-    def end_te
-    st(self, test, answered):
+    def end_test(self, test, answered):
         try:
             end_button_xpath = '//*[@id="FullScreen"]/div[2]/div/div[3]/button[6]'
             end_button = self.browser.find_element(By.XPATH, end_button_xpath)
