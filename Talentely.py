@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.5'
+        self.version = '8.6'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
