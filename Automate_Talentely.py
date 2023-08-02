@@ -1,6 +1,10 @@
 from json import dump, load, loads
 from os import getcwd, path, system, getenv, makedirs
 from requests import get
+from selectTests import select_tests
+from threading import Thread
+from selenium import webdriver
+from webbrowser import open_new
 
 
 from Talentely import Talentely, AT
@@ -42,9 +46,7 @@ def main():
             configuration['password'] = pwd
 
             with open(AT_folder_path + '/Configuration.json', 'w') as json_file:
-                dump(configuration, json_file)
-
-            
+                dump(configuration, json_file)            
 
         t = Talentely(configuration['email'], configuration['password'], configuration['answer-percentage'], configuration['time-percentage'], configuration['attend-c-test'])       
         try:
@@ -110,10 +112,10 @@ def main():
         try:
             percentage = int(input('Enter approximate percentage of time you want the application to attend all tests (The default is 100): '))
 
-            if percentage in range(101):
+            if percentage in range(20, 101):
                 pass
             else:
-                print('Percentage should be from 0 - 100')
+                print('Percentage should be from 20 - 100')
                 
                 return
         except:
@@ -137,25 +139,31 @@ def main():
         system('cls')
             
     elif option == '7':
-        browser = webdriver.Edge()
-        try:
-            browser.get(path.join(getcwd() + '\selectTests', 'select_tests.html'))
-        except:
-            browser.get(path.join(getcwd(), 'select_tests.html'))
-        input()
+        # browser = webdriver.Edge()
+        # browser.get('https://automatetalentely.netlify.app/selecttests')        
+        # input()
+        system('cls')
+        open_new('https://automatetalentely.netlify.app/selecttests')
     
     elif option == '8':
         with open(AT_folder_path + '/TestStatus.json', 'r') as file:
             TestStatus = load(file)
 
         system('cls')
-        print('/nTests Completed : {}\nTests Remaining : {}\nTests Error : {}'.format(len(TestStatus['COMPLETED']), len(TestStatus['INCOMPLETE']), len(TestStatus['ERROR']), ))
+        print('\nTests Completed : {}\nTests Remaining : {}\nTests Error : {}'.format(len(TestStatus['COMPLETED']), len(TestStatus['INCOMPLETE']), len(TestStatus['ERROR']), ))
 
     else:
         system('cls')
         print('\nENTER VALID OPTION')
 
 if __name__ == '__main__':
+    class flask_server(Thread):
+        def run(self):
+            select_tests.select_tests_app.run()
+    
+    flask_server().start()
+    system('cls')
+
 
     AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
     at = AT()

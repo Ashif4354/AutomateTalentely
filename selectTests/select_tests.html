@@ -38,7 +38,8 @@
     </ul>
     <ul class="ulList">
         <li>
-            <p class="notes">Changes will not be reflected unless you reset your progress using reset progress option</p>
+            <p class="notes">Changes will not be reflected unless you reset your progress using reset progress option
+            </p>
         </li>
     </ul>
     <br />
@@ -69,22 +70,24 @@
                 }
             }
             //console.log(tests)
-            download_json(tests)
+            save_json(tests)
         }
 
-        function download_json(tests) {
-            const jsonData = JSON.stringify(tests);
+        function save_json(tests) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(tests)
+            };
 
             const fileName = "tests.json";
 
-            const blob = new Blob([jsonData], {
-                type: "application/json"
-            });
-
-            const link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = fileName;
-            link.click();
+            fetch('http://127.0.0.1:5000', requestOptions)
+                .then(res => { console.log(res.text()) })
+            
+                alert('Tests Updated. Now you may close this window')
 
 
         }

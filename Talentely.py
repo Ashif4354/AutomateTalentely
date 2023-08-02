@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from json import dump, load, loads
 from os import getcwd, system, getenv, path
-from random import randint, choice, shuffle
+from random import randint, choice, shuffle, random
 from logger import logger
 from requests import get
 from tkinter import Tk, Label, Button
@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.4'
+        self.version = '8.5'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_cofiguration_files(self):
@@ -429,9 +429,12 @@ class Talentely:
 
         equal_time = total_calculated_time / no_of_questions
         
-        for i in range(loop_count):
+        for i in range(loop_count - 1):
 
-            random_time  = randint(1, int(equal_time * (1 / 4)))
+            try:
+                random_time  = randint(1, int(equal_time * (1 / 4)))
+            except:
+                random_time = random()
 
             if i < loop_count - 1:
                 time_for_each_question.append(equal_time + random_time)
