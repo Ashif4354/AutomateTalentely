@@ -25,7 +25,7 @@ def select_tests_():
         'ERROR' : []
     }
 
-    with open(f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely", 'w') as file:
+    with open(f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely/TestStatus.json", 'w') as file:
         dump(test_status, file)
 
 
