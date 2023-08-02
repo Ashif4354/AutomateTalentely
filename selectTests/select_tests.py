@@ -16,7 +16,8 @@ select_tests_app.logger.disabled = True
 @select_tests_app.route("/", methods=['POST'])
 def select_tests_():
     tests = loads(request.data.decode('utf-8'))
-    with open(getcwd().rstrip('selectTests') + '/jsonFiles/tests.json', 'w') as json_file:
+    
+    with open('tests.json', 'w') as json_file:
         dump(tests, json_file)
 
     test_status = {
