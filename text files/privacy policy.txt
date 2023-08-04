@@ -1,0 +1,39 @@
+Privacy Policy
+
+This privacy policy applies to the application downloaded from automatetalentely.netlify.app
+
+1. Information We Collect
+
+    We collect information about you when you use our application. The information we collect may includes
+        Username from your pc 
+        Email address you use in the application
+        The percentage you set for correct answers
+        The percentage you set for completion time
+        The version of the application you are using
+        The information regarding test started and finished by the application
+        Exceptions occured during runtime
+    
+    We also get notification when someone download our application, but we do not collct information about who is downloading it.
+    
+    Note: We do not collect your password
+
+2. How We Use Your Information
+
+    We use the information we collect for a variety of purposes, including to:
+        Improve our website and services
+
+3. Sharing Your Information
+
+    We will not share your information with third parties for any purpose.
+
+4. Security
+
+    We take steps to protect your information from unauthorized access, use, or disclosure. However, no security system is perfect, and we cannot guarantee the absolute security of your information.
+
+5. Changes to This Privacy Policy
+
+    We may update this privacy policy from time to time. If we make any significant changes, we may not notify you.
+
+6. Contact Us
+
+    If you have any questions about this privacy policy, please dont feel free to contact us..

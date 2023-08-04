@@ -1,7 +1,14 @@
 from datetime import datetime
 from requests import post
-from os import path, getenv
+from os import path, getenv, environ
 from json import load
+from discord import File
+
+def print_logs(*args):
+    if environ['print-logs'] == 'TRUE':
+        for i in args:
+            print(i, end = '')
+        print()
 
 class logger:
     def __init__(self, email, version):

@@ -1,0 +1,50 @@
+
+Problem Statement:
+Develop an application named "Automate Talentely Service (ATS)" that facilitates the streamlined administration and completion of assessment tests for users on the Talentely portal. The ATS application will provide a comprehensive set of features aimed at enhancing user experience and efficiency during the assessment process.
+
+Features and Functionalities:
+
+    User Registration and Information Collection:
+    The ATS application will allow users to register by collecting their usernames and passwords. Additionally, the application will gather user-provided information such as the percentage of correct answers and percentage completion time for tests.
+
+    Local User Profile Management:
+    ATS will enable users to create and manage profiles by saving their information locally, ensuring convenient access to past performance data.
+
+    Selective Test Participation:
+    The application will empower users to manually choose which tests they wish to attend. This feature offers flexibility and personalized test-taking experiences.
+
+    Progress Reset Option:
+    ATS will include a manual option for users to reset their test progress, allowing them to start anew when needed.
+
+    Seamless Talentely Portal Integration:
+    The application will have the capability to open a web browser and navigate to the Talentely portal's login page.
+
+    Automated Test Login:
+    ATS will streamline the login process by automatically signing in to the Talentely portal using the user-provided credentials.
+
+    Efficient Test Navigation:
+    Once logged in, ATS will navigate to each test, utilizing the information stored to automatically ferch test duration and question count.
+
+    Test Progress Monitoring:
+    ATS can display the test status and progress, giving users feedback on their progress.
+
+    Smooth Test Transition:
+    In case a new test os initiates=d while another is in progress, ATS will automatically submit the ongoing test and seamlessly transition to the new one.
+
+    Error Handling for Warnings:
+    The application will be designed to handle warning messages during test attendance. If a warning occurs, ATS will interact with the prompt (e.g., clicking "OK") to ensure uninterrupted testing.
+
+    Dynamic Answering Strategy:
+    ATS will incorporate a dynamic answering strategy, allowing users to specify a percentage of correct answers. The application will randomly select questions to answer incorrectly, based on the defined percentage.
+
+    Variable Time Allocation:
+    While each question may take a different amount of time to answer, the total test time will remain constant, ensuring it look more humane.
+
+Objective:
+The primary objective of the ATS application is to streamline the process of taking assessment tests on the Talentely portal. By automating login, test navigation, progress tracking, and error handling, ATS aims to enhance user convenience, reduce manual intervention, and promote a more efficient and user-friendly testing experience.
+
+Benefit:
+ATS will provide users with a tool that simplifies the process of engaging with Talentely's assessment tests. The application's features will collectively save users time, eliminate repetitive actions, and enable a more focused and controlled testing environment. ATS seeks to enhance user satisfaction and success in their assessment endeavors.
+
+
+

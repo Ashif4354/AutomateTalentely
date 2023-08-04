@@ -1,15 +1,15 @@
 from json import dump, load, loads
-from os import getcwd, path, system, getenv, makedirs
+from os import getcwd, path, system, getenv, makedirs, environ
 from requests import get
 from selectTests import select_tests
 from threading import Thread
 from selenium import webdriver
 from webbrowser import open_new
 
-
 from Talentely import Talentely, AT
 
 def main():  
+    global admin
 
     def reset_status():
         test_status = {
@@ -151,6 +151,16 @@ def main():
 
         system('cls')
         print('\nTests Completed : {}\nTests Remaining : {}\nTests Error : {}'.format(len(TestStatus['COMPLETED']), len(TestStatus['INCOMPLETE']), len(TestStatus['ERROR']), ))
+    
+    elif option == 'admin':
+        system('cls')
+        option_2 = input('1. Print Logs\n\nYour Option : ')
+
+        if option_2 == '1':
+            environ['print-logs'] = 'TRUE'            
+        else:
+            pass
+        system('cls')
 
     else:
         system('cls')
@@ -162,6 +172,9 @@ if __name__ == '__main__':
             select_tests.select_tests_app.run()
     
     flask_server().start()
+
+    environ['print-logs'] = 'FALSE'
+
     system('cls')
 
 
