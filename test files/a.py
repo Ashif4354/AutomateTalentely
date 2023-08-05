@@ -1,5 +1,4 @@
-class a:
-    def __init__(self):
-        self.b = 1
+import getpass
 
-print(a().b)
+password = getpass.getpass('ENTER: ')
+print(password)

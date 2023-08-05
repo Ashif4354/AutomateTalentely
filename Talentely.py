@@ -17,10 +17,10 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.7'
+        self.version = '8.8'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
-    def create_cofiguration_files(self):
+    def create_configuration_files(self):
 
         if not path.exists(self.AT_folder_path):
             makedirs(self.AT_folder_path)
@@ -168,8 +168,8 @@ class Talentely:
                 pass
 
         except Exception as exception:        
-            print('\nSOME ERROR OCCURED', exception)
-            self.logger.report_exception(test, 'Navigate_home_page', exception)
+            print('\nSOME ERROR OCCURED', str(exception)[:200])
+            self.logger.report_exception(test, 'Navigate_home_page', str(exception)[:200])
             input('NOTE DOWN THE ABOVE ERROR along with screenshot of the BROWSER window when the error occured and ping the developer')
 
         #input()
@@ -366,13 +366,18 @@ class Talentely:
 
         WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, f'stepper1')))
         print_logs('# tests menu appeared')
+        sleep(1)
         
         count = 1
         while True:
-            
-            test_button_2 = self.browser.find_element(By.ID, f'stepper{count}')
+            print_logs('# stepper count ', count)
+            try:
+                test_button_2 = self.browser.find_element(By.ID, f'stepper{count}')
+            except:
+                return 'Not Found'
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', test_button_2)
-
+            
+            print_logs('# the text in each stepper value : ' + test_button_2.text.lower())
             if test[4].lower() in test_button_2.text.lower():
                 print_logs('# test found')
                 test_button_2.click()
@@ -405,6 +410,12 @@ class Talentely:
         #sleep(2)
         
         index = self.click_test(test)
+
+        if index == 'Not Found':
+            self.browser.back()
+            self.browser.back()
+            self.browser.back()
+            return
 
         test_name = test[4]
 
@@ -475,7 +486,7 @@ class Talentely:
 
         except Exception as exception:
             print_logs('#', test_name, '\n', str(exception)[:200])
-            self.logger.report_exception(test, 'find_and_do_test', exception)
+            self.logger.report_exception(test, 'find_and_do_test', str(exception)[:200])
             #print("EXCEPTION", exception)
             print_logs('# Going to endtest2')
             self.end_test2(test) 

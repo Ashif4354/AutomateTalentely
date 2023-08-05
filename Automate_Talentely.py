@@ -5,6 +5,7 @@ from selectTests import select_tests
 from threading import Thread
 from selenium import webdriver
 from webbrowser import open_new
+from getpass import getpass
 
 from Talentely import Talentely, AT
 
@@ -154,6 +155,11 @@ def main():
     
     elif option == 'admin':
         system('cls')
+        password = getpass('Password : ')
+        if password != 'fihsa':
+            system('cls')
+            return
+        system('cls')
         option_2 = input('1. Print Logs\n\nYour Option : ')
 
         if option_2 == '1':
@@ -180,7 +186,7 @@ if __name__ == '__main__':
 
     AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
     at = AT()
-    at.create_cofiguration_files()
+    at.create_configuration_files()
     at.check_update()
 
     print('\nDEVELOPED BY The DG')

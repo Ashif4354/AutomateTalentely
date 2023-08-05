@@ -8,12 +8,14 @@
 
 # You need not install anything else to run this application
 # 1920 X 1080 resolution is recommended, and scale value of 100% is recommended
+# If your PC does not 1920 x 1080 resolution, after the application starts the tests always zoom out the browser to 75%
 # Latest version of Microsoft EDGE browser is recommended
 # Good Internet connectivity with less interruption is recommended 
 # Minimum 400MB of free RAM is recommended
 # Avoid modification of json files
 # The application may stop on rare occasions due to exceptions , so just restart the app to continue
 # Make sure the PC doesnt go into sleep mode automatically
+# Compulsorily Make sure the browser window opened by the application always stays in fullscreen mode
 
 # Close all Background process for less interruptions
 ##----------------------------------------------------------------#
@@ -45,7 +47,7 @@
 # The Progress does not reset itself.
 # If the progress is reset, all the test will be performed from first by the application
 
-# If you close the application or the browser window at any time, dont worry, the application can continue from the same point (i.e. same test). progress will not reset.
+# If you close the application or the browser window at any time, dont worry, the application can continue from the same point (i.e. same test). progress will be saved and will not be reset.
 # In any case, if the application closes by itself just run application again
 
 # You can specify how much percentage of questions need to be answered correctly 
@@ -61,7 +63,5 @@
 # You can manually select which tests to attend
 # Just select option 7 after you launch the application
 # A browser window will open up listing all the tests assigned by the training cell
-# After you click save button, a 'tests.json' file will be downloaded automatically
-# Just replace the 'tests.json' file in the root directory with the downloaded 'tests.json' file
-# Reset your progress by selecting option 2 after launching the application
-# Changes will not be reflected unless you reset your progress
+# You need to manually select your desired tests
+# After you click save button, your tests will be updated automatically. 
