@@ -280,11 +280,6 @@ class Talentely:
             print_logs('#\n\n\n')
             print_logs('# TEST processing', test)
             self.navigate_home_page(test)
-        
-        for test in self.get_json('TestStatus')['ERROR'].copy():
-            print_logs('#\n\n\n')
-            print_logs('# ERRORED TEST processing', test)
-            self.navigate_home_page(test)
 
         incomplete_tests = self.get_json('TestStatus')['INCOMPLETE']
         print_logs('# incomplete tests fetched')
