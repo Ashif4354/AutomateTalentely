@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.8'
+        self.version = '8.9'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -264,7 +264,8 @@ class Talentely:
             test_status['COMPLETED'].append(test)
             test_status['INCOMPLETE'].remove(test)
         else:
-            test_status['ERROR'].append(test)
+            if not test in test_status['ERROR']:
+                test_status['ERROR'].append(test)
             test_status['INCOMPLETE'].remove(test)
         
         with open(self.AT_folder_path + '/TestStatus.json', 'w') as json_file:
@@ -280,7 +281,7 @@ class Talentely:
             print_logs('# TEST processing', test)
             self.navigate_home_page(test)
         
-        for test in self.get_json('TestStatus')['ERROR']:
+        for test in self.get_json('TestStatus')['ERROR'].copy():
             print_logs('#\n\n\n')
             print_logs('# ERRORED TEST processing', test)
             self.navigate_home_page(test)
@@ -428,7 +429,10 @@ class Talentely:
 
         try:
             start_test_button_xpath = f'//*[@id="height{index - 1}"]/div/div/div/button/span[1]'
-            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, start_test_button_xpath)))
+            try:
+                WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, start_test_button_xpath)))
+            except:
+                pass
             print_logs('# start button appeared')
             start_test_button = self.browser.find_element(By.XPATH, start_test_button_xpath)
 

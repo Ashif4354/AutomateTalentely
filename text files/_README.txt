@@ -16,6 +16,7 @@
 # The application may stop on rare occasions due to exceptions , so just restart the app to continue
 # Make sure the PC doesnt go into sleep mode automatically
 # Compulsorily Make sure the browser window opened by the application always stays in fullscreen mode
+# Make sure the Firewall of your PC is not blocking the application
 
 # Close all Background process for less interruptions
 ##----------------------------------------------------------------#

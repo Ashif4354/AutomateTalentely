@@ -5,18 +5,16 @@ DONT SHARE this application without DG's permission
 
 Run the program as ADMINISTRATOR always
 
-This software is meant for students of KCG College of Technology ONLY
-
-Developer / Alpha Tester - DQILKT
+Developer / Alpha Tester - BULMLV
 
 Team 
-- DQILKT
-- NBQDQLBT
-- GMEQMNLV 
+- BULMLV
+- PTKTHNUBLPDY
+- OLPDFBLY 
 
 Idea providers 
-- GMEQMNLV
-- DBIBLWLW
-- IDWMRT
+- OLPDFBLY
+- IBTIXDXD
+- PBXPDZ
 
 The above names are encrypted using playfair cipher , and if you find the key used while encrypting it, you get our names,  and if you come to the developer and tell the correct key, he will give you a small gift
