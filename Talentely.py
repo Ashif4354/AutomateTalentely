@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from time import sleep
+from time import sleep, perf_counter
 from json import dump, load, loads
 from os import getcwd, system, getenv, path, makedirs
 from random import randint, choice, shuffle, random
@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.9'
+        self.version = '8.10'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -114,6 +114,7 @@ class Talentely:
 
     def navigate_home_page(self, test):
         print_logs('# in navigate home page')
+        self.browser.execute_script("window.scrollTo(0, 200);")
         try:
             academy_menu_button_xpath = '//*[@id="side-content"]/div/div/div/ul/a[6]/div'
             WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, academy_menu_button_xpath)))
@@ -445,7 +446,7 @@ class Talentely:
             return 
 
         try:
-            print_logs('# a test already in progress')
+            print_logs('# checking if a test is already in progress')
             submit_button_xpath = '/html/body/div[3]/div[3]/div/div[3]/button[1]'
             WebDriverWait(self.browser, 2).until(EC.visibility_of_element_located((By.XPATH, submit_button_xpath)))
             print_logs('# submit button appeared')
@@ -460,6 +461,7 @@ class Talentely:
             print_logs('# proceed button found') 
             proceed_button.click()
             print_logs('# proceed button clicked')
+            print_logs('# The test already in progress has been submitted')
         except Exception as e:
             pass                 
 
@@ -469,22 +471,22 @@ class Talentely:
             print_logs('# end button appeared and found')
             
             try:
-                print_logs('#', test_name, 'trying to get answers')
+                print_logs('# ', test_name, 'trying to get answers')
                 answers = self.get_answers(test_name)
-                print_logs('#', test_name, 'got answers')
+                print_logs('# ', test_name, 'got answers')
             except:
-                print_logs('#', test_name, 'in except coz no answers found')
+                print_logs('# ', test_name, 'in except coz no answers found')
                 self.end_test(test, answered = False)   
             
-            print_logs('#', test_name, 'going to do test')
+            print_logs('# ', test_name, 'going to do test')
             self.do_test(test, test_time, answers) 
-            print_logs('#', test_name, 'test done, going to press end button',)           
+            print_logs('# ', test_name, 'test done, going to press end button',)           
 
             self.end_test(test, answered = True)
-            print_logs('#', test_name, 'test_ended')
+            print_logs('# ', test_name, 'test_ended')
 
         except Exception as exception:
-            print_logs('#', test_name, '\n', str(exception)[:200])
+            print_logs('# ', test_name, '\n', str(exception)[:200])
             self.logger.report_exception(test, 'find_and_do_test', str(exception)[:200])
             #print("EXCEPTION", exception)
             print_logs('# Going to endtest2')
@@ -531,13 +533,16 @@ class Talentely:
         print_logs('# in get random time')
         time_for_each_question = []
         
-        print_logs('# before calculating total time, test time:', test_time, 'no of questions:', no_of_questions)
-        total_calculated_time = (test_time * self.time_percentage / 100) - (no_of_questions * 2)
-        print_logs('# total calculated time:', total_calculated_time)
+        print_logs('# before calculating total time, test time: ', test_time, 'no of questions: ', no_of_questions)
+        total_calculated_time = (test_time * self.time_percentage / 100)# - (no_of_questions * 3)
+        print_logs('# total calculated time after applying percentage:', total_calculated_time)
 
-        if total_calculated_time > test_time - 30:
-            total_calculated_time = test_time - 30
-        print_logs('# total calculated time after adjustment:', total_calculated_time)
+        if total_calculated_time > test_time - 45:
+            total_calculated_time = test_time - 45
+        print_logs('# total calculated time after applying buffer time:', total_calculated_time)
+
+        total_calculated_time = (test_time * self.time_percentage / 100) - (no_of_questions * 3)
+        print_logs('# total calculated time after subtracting all waiting time:', total_calculated_time)        
 
         if no_of_questions % 2 == 0:
             even = True
@@ -602,18 +607,20 @@ class Talentely:
         for index in range(1, no_of_questions + 1):
             if answers[str(index)] == '':
                 wrong_answers.append(index)
-        print_logs('# Wrong answers after appending empty values', wrong_answers)        
+        print_logs('# Wrong answers after appending empty values ', wrong_answers)        
 
         while len(wrong_answers) < no_of_questions - correct_answers:
             question_num = randint(1, no_of_questions)
 
             if question_num not in wrong_answers:
                 wrong_answers.append(question_num)   
-        print_logs('# wrong answers after appending random values to remaining spots') 
-
+        print_logs('# wrong answers after appending random values to remaining spots ', wrong_answers) 
+        
         for question in range(1, no_of_questions + 1):
-            print_logs('# question number', question)
+            start_time = perf_counter()
+            print_logs('# Question number ', question)
             sleep(time_for_each_question[question - 1])
+            print_logs('# Sleep time was {}'.format(perf_counter() - start_time))
             #sleep(1)
             answer = answers[str(question)].lower()        
                 
@@ -638,22 +645,24 @@ class Talentely:
                     for i in range(1,7):
                         xpath_ = xpath.format(i)
                         try:
-                            print_logs('# trying option ', i)
+                            print_logs('# trying option : ', i)
                             option = self.browser.find_element(By.XPATH, xpath_)
                             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
-                            print_logs('option xpath verified')
+                            print_logs('# option xpath verified')
                             xpath_verified = True
                             print_logs('# option found in try itself, xpath verified ', i)
                         except Exception as exception:
-                            print_logs('# probable warning encountered ', str(exception)[:200])
+                            print_logs('# probable warning encountered (OR) option {} not found'.format(i), str(exception)[:200])
                             try:
                                 warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
                                 warning_ok_button.click()
+                                sleep(.5)
                                 print_logs('# warning clicked')
+                                
                             except:
                                 pass
                             
-                            sleep(1)
+                            
                             option = self.browser.find_element(By.XPATH, xpath_)
                             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', option)
                             xpath_verified = True
@@ -712,6 +721,7 @@ class Talentely:
                     next_button = self.browser.find_element(By.XPATH, next_button_xpath)
                     next_button.click()
                     print_logs('# next button in except clicked')
+            print_logs('# TIME taken for question {} : {}'.format(question, perf_counter() - start_time))
 
     def type_codes(self, no_of_questions, time_for_each_question):
         print_logs('# in type codes')
@@ -735,7 +745,7 @@ class Talentely:
                     warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
                     warning_ok_button.click()
                     print_logs('# warning button clicked')
-                    sleep(1)
+                    sleep(.5)
                     
                     print_logs('# next button found, in except')
                     next_button_xpath = '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]'

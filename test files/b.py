@@ -1,28 +1,11 @@
-import winsound
-import time
+import win32api
+import win32con
 
-def play_sound(sound_type):
-    winsound.MessageBeep(sound_type)
-    print(f"Playing sound: {sound_type}")
+def get_windows_resolution():
+    width = win32api.GetSystemMetrics(win32con.SM_CXSCREEN)
+    height = win32api.GetSystemMetrics(win32con.SM_CYSCREEN)
+    return width, height
 
 if __name__ == "__main__":
-    # Toggle the default beep sound ON
-    play_sound(winsound.MB_ICONHAND)
-
-    # Wait for a few seconds
-    time.sleep(2)
-
-    # Play other sounds
-    play_sound(winsound.MB_ICONASTERISK)
-    time.sleep(2)
-
-    play_sound(winsound.MB_ICONEXCLAMATION)
-    time.sleep(2)
-
-    play_sound(winsound.MB_ICONQUESTION)
-    time.sleep(2)
-
-    play_sound(winsound.MB_OK)
-    time.sleep(2)
-
-    play_sound(winsound.MB_ICONERROR)
+    width, height = get_windows_resolution()
+    print(f"The Windows resolution is {width}x{height}")

@@ -26,7 +26,7 @@ def main():
 
     c_test_attend_status = 'ON' if configuration['attend-c-test'] else 'OFF'
 
-    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage\n5. Set Completion time percentage\n6. Toggle On/Off to Attend c programming test(without answers)(currently {})\n7. Manually select which tests to attend\n8. Show test status\n\nYOUR OPTION : ".format(c_test_attend_status))
+    option = input("\n1. Start / Resume test\n2. Reset test progress\n3. Change user (test progress will be reset)\n4. Set Correct answer percentage (Current value : {}%)\n5. Set Completion time percentage (Current value : {}%)\n6. Toggle On/Off to Attend c programming test(without answers)(currently {})\n7. Manually select which tests to attend\n8. Show test status\n\nYOUR OPTION : ".format(configuration['answer-percentage'], configuration['time-percentage'], c_test_attend_status))
     
     if option == '1':
         if configuration['email'] == '':
@@ -56,6 +56,7 @@ def main():
             print('\nSome Error Occured at login')
 
         print('\nAutomation Started\n')
+        system('cls')
         t.perform_tests()
     
     elif option == '2':

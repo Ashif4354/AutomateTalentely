@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Automate Talentely"
-#define MyAppVersion "8.9"
+#define MyAppVersion "8.10"
 #define MyAppPublisher "DG"
 #define MyAppURL "automatetalentely.netlify.app"
 #define MyAppExeName "Automate_Talentely.exe"
@@ -40,15 +40,12 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\AllTests.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Answers.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Ctests.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Qtests.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Rtests.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\tests.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Vtests.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\selectTests\select_tests.html"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\selectTests\styles.css"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\text files\_README.txt"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
