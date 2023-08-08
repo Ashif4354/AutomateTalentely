@@ -119,7 +119,8 @@ def main():
             if percentage in range(20, 101):
                 pass
             else:
-                print('Percentage should be from 20 - 100')
+                system('cls')
+                print('((Percentage should be from 20 - 100))')
                 
                 return
         except:
