@@ -727,7 +727,7 @@ class Talentely:
         print_logs('# in type codes')
         
         for question in range(1, no_of_questions + 1):
-            print('question number', question)
+            print_logs('# Question number', question)
             sleep(time_for_each_question[question - 1])
             #typing_field_xpath = '//*[@id="editor"]/textarea'
             #typing_field = self.browser.find_element(By.XPATH, typing_field_xpath)

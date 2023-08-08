@@ -54,9 +54,11 @@ def main():
             t.login()
         except Exception as exception: #log needed
             print('\nSome Error Occured at login')
+            return
 
-        print('\nAutomation Started\n')
         system('cls')
+        print('\nAutomation Started\n')
+        
         t.perform_tests()
     
     elif option == '2':

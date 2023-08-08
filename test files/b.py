@@ -1,11 +1,10 @@
-import win32api
-import win32con
+from selenium import webdriver
+from selenium.webdriver.edge.options import EdgeOptions
 
-def get_windows_resolution():
-    width = win32api.GetSystemMetrics(win32con.SM_CXSCREEN)
-    height = win32api.GetSystemMetrics(win32con.SM_CYSCREEN)
-    return width, height
+options = EdgeOptions()
+options.add_argument('--log-level=0')
 
-if __name__ == "__main__":
-    width, height = get_windows_resolution()
-    print(f"The Windows resolution is {width}x{height}")
+driver = webdriver.Edge(options=options)
+driver.get('https://www.google.com')
+
+# The "DevTools listening" message will not be printed
