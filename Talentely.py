@@ -114,7 +114,7 @@ class Talentely:
 
     def navigate_home_page(self, test):
         print_logs('# in navigate home page')
-        self.browser.execute_script("window.scrollTo(0, 200);")
+        
         try:
             academy_menu_button_xpath = '//*[@id="side-content"]/div/div/div/ul/a[6]/div'
             WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, academy_menu_button_xpath)))
@@ -126,7 +126,7 @@ class Talentely:
             print_logs('# academy menu button clicked')
         except:
             pass
-        
+
         try:
             if test[0] == 'a':
                 aptitude_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/button'
@@ -157,6 +157,7 @@ class Talentely:
                 pass
 
             if test[0] == 'a':
+                self.browser.execute_script("window.scrollTo(0, 300);")
                 aptitude_button.click()
                 print_logs('# aptitude button clicked')                
                 self.navigate_aptitude(test)
