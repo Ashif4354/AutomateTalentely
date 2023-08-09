@@ -1,4 +1,4 @@
-#READ FULLY#
+#READ THIS FULLY#
 
 # visit automatetalentely.netlify.app for more info
 
@@ -17,6 +17,7 @@
 # Make sure the PC doesnt go into sleep mode automatically
 # Compulsorily Make sure the browser window opened by the application always stays in fullscreen mode
 # Make sure the Firewall of your PC is not blocking the application
+# Don't use an account used In one pc into another pc, because the test progress for that account is saved in the first pc, and if you put the same account in another pc , all the test will be started from first
 
 # Close all Background process for less interruptions
 ##----------------------------------------------------------------#

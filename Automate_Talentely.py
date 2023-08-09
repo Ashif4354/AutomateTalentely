@@ -194,7 +194,8 @@ if __name__ == '__main__':
     at.check_update()
 
     print('\nDEVELOPED BY The DG')
-    print("COMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access" )
+    print("\nCOMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access" )
+    print('\nYour PC Display resolution should be 1920 x 1080 and scale should be 100% or else the app may not work as intended')
     print('\nvisit automatetalentely.netlify.app for more..')
 
     while True:

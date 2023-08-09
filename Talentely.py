@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.10'
+        self.version = '8.11'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -618,6 +618,7 @@ class Talentely:
         
         for question in range(1, no_of_questions + 1):
             start_time = perf_counter()
+            print_logs('# \n')
             print_logs('# Question number ', question)
             sleep(time_for_each_question[question - 1])
             print_logs('# Sleep time was {}'.format(perf_counter() - start_time))

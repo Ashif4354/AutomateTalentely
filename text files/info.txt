@@ -1,8 +1,9 @@
-Talentely Completion Service
+ATS
 
 This application is developed by DG
 DONT SHARE this application without DG's permission
 
+COMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access
 Run the program as ADMINISTRATOR always
 
 Developer / Alpha Tester - BULMLV
