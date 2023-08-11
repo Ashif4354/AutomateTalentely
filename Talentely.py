@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.12'
+        self.version = '8.13'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -112,25 +112,27 @@ class Talentely:
 
         print_logs('# login successful')
 
-    def navigate_home_page(self, test):
-        print_logs('# in navigate home page')
-        
         try:
             academy_menu_button_xpath = '//*[@id="side-content"]/div/div/div/ul/a[6]/div'
-            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, academy_menu_button_xpath)))
+            WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, academy_menu_button_xpath)))
             print_logs('# academy button appeared')
             academy_menu_button = self.browser.find_element(By.XPATH, academy_menu_button_xpath)
             print_logs('# academy menu button found')
             self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', academy_menu_button)
             academy_menu_button.click()
             print_logs('# academy menu button clicked')
-        except:
-            pass
+        except Exception as exception:
+            print('\nERROR OCCURED', str(exception)[:200])
+            self.logger.report_exception(test, 'Login', str(exception)[:200])
+            
+
+    def navigate_home_page(self, test):
+        print_logs('# in navigate home page')        
 
         try:
             if test[0] == 'a':
                 aptitude_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/button'
-                WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, aptitude_button_xpath)))  
+                WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, aptitude_button_xpath)))  
                 print_logs('# aptitude button appeared')     
                 aptitude_button = self.browser.find_element(By.XPATH, aptitude_button_xpath)
                 print_logs('# aptitude button found')
@@ -139,7 +141,7 @@ class Talentely:
 
             elif test[0] == 'c' and self.attend_c_test:
                 c_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/button'
-                WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, c_button_xpath)))
+                WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, c_button_xpath)))
                 print_logs('# c button appeared')
                 c_button = self.browser.find_element(By.XPATH, c_button_xpath)
                 print_logs('# c button found')
@@ -163,6 +165,7 @@ class Talentely:
                 self.navigate_aptitude(test)
 
             elif test[0] == 'c':
+                self.browser.execute_script("window.scrollTo(0, 300);")
                 c_button.click()
                 print_logs('# c button clicked')                
                 self.navigate_c(test)
