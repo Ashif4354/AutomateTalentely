@@ -574,7 +574,8 @@ for key in data_R.keys():
     key2 = key.lower()
     new_dict[key2] = data_R[key]
 
-with open('AllTests.json', 'w') as json_file:
-  json.dump(all_tests, json_file)
+if __name__ == '__main__':
+    with open('AllTests.json', 'w') as json_file:
+        json.dump(all_tests, json_file)
 
 

@@ -16,6 +16,7 @@ class logger:
     def __init__(self, email, version):
         self.email = email
         self.username = getenv('USERNAME')
+        self.computername = getenv('COMPUTERNAME')
         self.discord = discord(self.email)
         self.version = version
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
@@ -25,7 +26,7 @@ class logger:
         with open(self.AT_folder_path + '/TestStatus.json', 'r') as file:
             tets_status = load(file)
         
-        description = "UserName : {}\nEmail : {}\nAnswer% : {}\nTime% : {}\nC-Test : {}\nATS Version : {}\nWindows Resolution : {}\nTest Completed : {}\nTest Remaining : {}\nTest Error : {}".format(self.username, self.configuration['email'], self.configuration['answer-percentage'], self.configuration['time-percentage'], 'True' if self.configuration['attend-c-test'] else 'False', self.version, self.windows_resolution, len(tets_status['COMPLETED']), len(tets_status['INCOMPLETE']), len(tets_status['ERROR']))
+        description = "PC Name : {}\nUserName : {}\nEmail : {}\nAnswer% : {}\nTime% : {}\nC-Test : {}\nATS Version : {}\nWindows Resolution : {}\nTest Completed : {}\nTest Remaining : {}\nTest Error : {}".format(self.computername, self.username, self.configuration['email'], self.configuration['answer-percentage'], self.configuration['time-percentage'], 'True' if self.configuration['attend-c-test'] else 'False', self.version, self.windows_resolution, len(tets_status['COMPLETED']), len(tets_status['INCOMPLETE']), len(tets_status['ERROR']))
         self.discord.send_embed(title = f'Automation Started at {self.get_time()}', description = description, url = 1)
         
         if not path.exists(path.join(self.AT_folder_path, 'logs.log')):
