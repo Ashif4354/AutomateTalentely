@@ -9,6 +9,7 @@
 # You need not install anything else to run this application
 # 1920 X 1080 resolution is recommended, and scale value of 100% is recommended
 # If your PC does not 1920 x 1080 resolution, after the application starts the tests always zoom out the browser to 75%
+# RUN THE APPLICATION AS ADMINISTRATOR ALWAYS
 # Latest version of Microsoft EDGE browser is recommended
 # Good Internet connectivity with less interruption is recommended 
 # Minimum 400MB of free RAM is recommended

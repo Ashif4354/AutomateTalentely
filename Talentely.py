@@ -13,11 +13,10 @@ from tkinter import Tk, Label, Button
 from winsound import MessageBeep, MB_ICONHAND
 from webbrowser import open_new
 
-
 class AT:
 
     def __init__(self):
-        self.version = '8.14'
+        self.version = '8.15'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -111,6 +110,8 @@ class Talentely:
         password_field.send_keys(Keys.ENTER)
 
         print_logs('# login successful')
+        
+        sleep(5)
 
         try:
             academy_menu_button_xpath = '//*[@id="side-content"]/div/div/div/ul/a[6]/div'
@@ -127,12 +128,12 @@ class Talentely:
             
 
     def navigate_home_page(self, test):
-        print_logs('# in navigate home page')        
+        print_logs('# in navigate home page')       
 
         try:
             if test[0] == 'a':
                 aptitude_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/button'
-                WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, aptitude_button_xpath)))  
+                #WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, aptitude_button_xpath)))  
                 print_logs('# aptitude button appeared')     
                 aptitude_button = self.browser.find_element(By.XPATH, aptitude_button_xpath)
                 print_logs('# aptitude button found')
@@ -141,7 +142,7 @@ class Talentely:
 
             elif test[0] == 'c' and self.attend_c_test:
                 c_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/button'
-                WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, c_button_xpath)))
+                #WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, c_button_xpath)))
                 print_logs('# c button appeared')
                 c_button = self.browser.find_element(By.XPATH, c_button_xpath)
                 print_logs('# c button found')
@@ -157,15 +158,16 @@ class Talentely:
                 sleep(.5)
             except:
                 pass
+            
+            self.browser.execute_script("window.scrollTo(0, 300);")
 
-            if test[0] == 'a':
+            if test[0] == 'a':                
                 self.browser.execute_script("window.scrollTo(0, 300);")
                 aptitude_button.click()
                 print_logs('# aptitude button clicked')                
                 self.navigate_aptitude(test)
 
             elif test[0] == 'c':
-                self.browser.execute_script("window.scrollTo(0, 300);")
                 c_button.click()
                 print_logs('# c button clicked')                
                 self.navigate_c(test)
@@ -284,6 +286,7 @@ class Talentely:
         for test in self.incomplete_tests:
             print_logs('#\n\n\n')
             print_logs('# TEST processing', test)
+            sleep(5)
             self.navigate_home_page(test)
 
         incomplete_tests = self.get_json('TestStatus')['INCOMPLETE']
