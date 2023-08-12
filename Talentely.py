@@ -17,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.13'
+        self.version = '8.14'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -365,7 +365,17 @@ class Talentely:
     def click_test(self, test):
         print_logs('# in click test')
 
-        WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, f'stepper1')))
+        try:
+            WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.ID, f'stepper1')))
+        except:
+            self.browser.back()
+            sleep(1)
+            self.browser.forward()
+            try:
+                WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.ID, f'stepper1')))
+            except:
+                return 'Not Found'
+
         print_logs('# tests menu appeared')
         sleep(1)
         
