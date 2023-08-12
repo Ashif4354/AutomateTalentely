@@ -16,7 +16,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.15'
+        self.version = '8.16'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -493,7 +493,8 @@ class Talentely:
                 print_logs('# ', test_name, 'got answers')
             except:
                 print_logs('# ', test_name, 'in except coz no answers found')
-                self.end_test(test, answered = False)   
+                self.end_test(test, answered = False) 
+                return  
             
             print_logs('# ', test_name, 'going to do test')
             self.do_test(test, test_time, answers) 
