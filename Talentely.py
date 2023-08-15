@@ -124,7 +124,7 @@ class Talentely:
             print_logs('# academy menu button clicked')
         except Exception as exception:
             print('\nERROR OCCURED', str(exception)[:200])
-            self.logger.report_exception(test, 'Login', str(exception)[:200])
+            self.logger.report_exception([], 'Login', str(exception)[:200])
             
 
     def navigate_home_page(self, test):
@@ -792,6 +792,7 @@ class Talentely:
 
         end_button.click()
         print_logs('# end button clicked')
+        sleep(1)
 
         submit_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button[2]'
         WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, submit_button_xpath)))
@@ -799,7 +800,7 @@ class Talentely:
         submit_button = self.browser.find_element(By.XPATH, submit_button_xpath)
         submit_button.click()
         print_logs('# submit button clicked')
-        sleep(5)
+        sleep(10)
         
         try:
             cancel_button_xpath = '/html/body/div[4]/div[3]/div/div[3]/button[2]'
