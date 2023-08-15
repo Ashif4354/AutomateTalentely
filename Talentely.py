@@ -16,7 +16,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.16'
+        self.version = '8.17'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
