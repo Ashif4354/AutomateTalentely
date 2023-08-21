@@ -1,0 +1,21 @@
+ATS
+
+This application is developed by DG
+DONT SHARE this application without DG's permission
+
+COMPULSORILY READ THE '_README.txt' file present in the installation directory, before using this application for ease of access
+Run the program as ADMINISTRATOR always
+
+Developer / Alpha Tester - BULMLV
+
+Team 
+- BULMLV
+- PTKTHNUBLPDY
+- OLPDFBLY 
+
+Idea providers 
+- OLPDFBLY
+- IBTIXDXD
+- PBXPDZ
+
+The above names are encrypted using playfair cipher , and if you find the key used while encrypting it, you get our names,  and if you come to the developer and tell the correct key, he will give you a small gift

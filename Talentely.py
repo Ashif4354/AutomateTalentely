@@ -16,7 +16,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.18'
+        self.version = '8.19'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -286,7 +286,7 @@ class Talentely:
         for test in self.incomplete_tests:
             print_logs('#\n\n\n')
             print_logs('# TEST processing', test)
-            sleep(5)
+            sleep(10)
             self.navigate_home_page(test)
 
         incomplete_tests = self.get_json('TestStatus')['INCOMPLETE']
