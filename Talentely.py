@@ -16,7 +16,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '8.19'
+        self.version = '8.20'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -559,7 +559,7 @@ class Talentely:
             total_calculated_time = test_time - 45
         print_logs('# total calculated time after applying buffer time:', total_calculated_time)
 
-        total_calculated_time = (test_time * self.time_percentage / 100) - (no_of_questions * 3)
+        total_calculated_time -= (no_of_questions * 3)
         print_logs('# total calculated time after subtracting all waiting time:', total_calculated_time)        
 
         if no_of_questions % 2 == 0:
