@@ -1,12 +1,17 @@
 import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from main import Talentely
 from bs4 import BeautifulSoup
 from time import sleep
 
+from os import getcwd, environ
+from sys import path
+path.append(getcwd().rstrip('other py'))
+from Talentely import Talentely
+
 tests = {}
 Answers = {}
+environ['print-logs'] = 'FALSE'
 
 with open('tests.json', 'r') as json_file:
   tests = json.load(json_file)
@@ -15,15 +20,18 @@ with open('Answers.json', 'r') as json_file:
   Answers = json.load(json_file)
 
 
-tests = {'TESTS' : [["a", "q", "averages", 1, "Averages_Level_3_Test 1"], ["a", "q", "averages", 2, "Averages_Level_1_Test 1"], ["a", "q", "pipes and cisterns", 1, "Pipes and Cistern_Level_1_Test 1"], ["a", "r", "coding and decoding", 1, "Coding and Decoding_Level_1_Test 1"]]}
+#tests = {'TESTS' : [["a", "q", "averages", 1, "Averages_Level_3_Test 1"], ["a", "q", "averages", 2, "Averages_Level_1_Test 1"], ["a", "q", "pipes and cisterns", 1, "Pipes and Cistern_Level_1_Test 1"], ["a", "r", "coding and decoding", 1, "Coding and Decoding_Level_1_Test 1"]]}
 
 def check_answers():
-    for test in Answers.keys():
-        if len(Answers[test]) < 6:
-            print(test, Answers[test])
+    count = 0
+    for test in tests['TESTS']:
+        #if len(Answers[test]) < 6:
+            #print(test, Answers[test])
+        count += 1
+    print(count)
 
 def main():
-    t = Talentely('20cs008@kcgcollege.com', 'vidhai')
+    t = Talentely('20cs062@kcgcollege.com', 'vidhai')
     t.login()
 
     reports_button = t.browser.find_element(By.XPATH, '//*[@id="side-content"]/div/div/div/ul/a[7]')
@@ -49,11 +57,13 @@ def main():
 
 
 
-        sleep(1)
+        sleep(2)
         
         select_test_button = t.browser.find_element(By.XPATH, '//*[@id="main-content"]/div/div[2]/div/div/div[2]/div/div/div[1]/div[2]/div')
         t.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', select_test_button)
         select_test_button.click()
+
+        sleep(2)
         
         count = 1
         while True:
@@ -69,7 +79,7 @@ def main():
                 #print(count, option.text)
                 count += 1
             except Exception as exception:
-                print(f'test not found {test}')
+                print(f'TEST NOT FOUND {test}')
                 break
         
         try:
@@ -135,14 +145,15 @@ def main():
         Answers[test[4]] = answers_        
 
         with open('Answers.json', 'w') as json_file:
-            json.dump(Answers, json_file)
+            pass
+            #json.dump(Answers, json_file)
         
         count_ += 1
         print(count_)
 
 if __name__ == '__main__':
-    #main()
-    check_answers()
+    main()
+    #check_answers()
 
 
 

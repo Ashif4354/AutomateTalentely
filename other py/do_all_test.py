@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 
+from create_json import data_Q, data_R, data_V
+
 def find_and_click_element_by_xpath(browser, xpath, name = ''):
     element = browser.find_element(By.XPATH, xpath)
     browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', element)
@@ -43,4 +45,18 @@ aptitude_tests_xpaths = {
     'r' : '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/a',
     'v' : '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a'
 }
+
+for apt in aptitude_tests_xpaths:
+
+    apt_btn_xpath = aptitude_tests_xpaths[apt]
+    find_and_click_element_by_xpath(browser, apt_btn_xpath, apt + ' button')
+
+    if apt == 'q':
+        tests = data_Q
+    elif apt == 'r':
+        tests = data_R
+    elif apt == 'v':
+        tests = data_V
+#####################  no use  ##########################
+
 

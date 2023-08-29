@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from time import sleep
+from time import sleep, perf_counter
 from json import load, dump
 
 from create_json import data_Q, data_R, data_V
@@ -64,8 +64,9 @@ aptitude_tests_xpaths = {
     'v' : '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a'
 }
 
-
+start = perf_counter()
 for apt in aptitude_tests_xpaths:
+    
 
     apt_btn_xpath = aptitude_tests_xpaths[apt]
     find_and_click_element_by_xpath(browser, apt_btn_xpath, apt + ' button')
@@ -100,7 +101,7 @@ for apt in aptitude_tests_xpaths:
                 continue
             
             test_name = browser.find_element(By.XPATH, f'//*[@id="stepper{index}"]/span/span[2]/span').text
-            Test = ['a', apt, tests_, index, test_name]
+            Test = ['a', apt, tests_.lower(), index, test_name]
             print(Test)
             add_test_to_test_json(Test)
 
@@ -116,6 +117,7 @@ for apt in aptitude_tests_xpaths:
     print('Back button clicked to go to q r v')
     sleep(3)
 
+print(f'\n\nTIME TAKEN : {perf_counter() - start}')
 
 
 #//*[@id="stepper1"]/span/span[2]/span
@@ -125,6 +127,7 @@ for apt in aptitude_tests_xpaths:
 
 # total test found in attempt 1 : 227
 # total test found in attempt 2 : 227
+# total test found in attempt 3 : 227
 
     
 
