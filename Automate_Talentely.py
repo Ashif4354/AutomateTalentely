@@ -144,9 +144,6 @@ def main():
         system('cls')
             
     elif option == '7':
-        # browser = webdriver.Edge()
-        # browser.get('https://automatetalentely.netlify.app/selecttests')        
-        # input()
         system('cls')
         open_new('https://automatetalentely.netlify.app/selecttests')
     
