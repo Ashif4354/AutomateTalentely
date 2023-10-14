@@ -1,0 +1,144 @@
+{
+    "TESTS": [
+        [
+            "a",
+            "q",
+            "simple interest & compound interest",
+            4,
+            "Simple Interest and Compound Interest_Level_3_Test 1"
+        ],
+        [
+            "a",
+            "q",
+            "boats and stream",
+            2,
+            "Boats and Streams_Level_1_test 1"
+        ],
+        [
+            "a",
+            "q",
+            "averages",
+            4,
+            "Averages_Level_1_Test 1"
+        ],
+        [
+            "a",
+            "q",
+            "algebra",
+            1,
+            "Algebra_Level_1_test 1"
+        ],
+        [
+            "a",
+            "q",
+            "clocks",
+            2,
+            "Clocks_level_2_test 1"
+        ],
+        [
+            "a",
+            "r",
+            "puzzle",
+            6,
+            "Puzzle_level_1_test_1"
+        ],
+        [
+            "a",
+            "r",
+            "syllogisms",
+            6,
+            "Syllogisms_Level_1_Test 2"
+        ],
+        [
+            "a",
+            "r",
+            "coding and decoding",
+            5,
+            "Coding and Decoding_Level_2_Test 2"
+        ],
+        [
+            "a",
+            "r",
+            "graph chart",
+            1,
+            "graph chart_level_2_test 1"
+        ],
+        [
+            "a",
+            "r",
+            "cube and cuboids",
+            1,
+            "cube and cuboids_level_2_test 1"
+        ],
+        [
+            "a",
+            "v",
+            "antonyms",
+            6,
+            "Antonyms_Level_2_Test 1"
+        ],
+        [
+            "a",
+            "v",
+            "sentence formation",
+            2,
+            "Sentence Formation_Level_1_Test 1"
+        ],
+        [
+            "a",
+            "v",
+            "selecting words",
+            3,
+            "Selecting words_Level_2_Test 1"
+        ],
+        [
+            "a",
+            "v",
+            "passage and inference",
+            3,
+            "Passage and Inference_Level_2_Test 1"
+        ],
+        [
+            "a",
+            "v",
+            "reading comprehension",
+            3,
+            "Reading Comprehension_Level_3_Test 1"
+        ],
+        [
+            "a",
+            "v",
+            "jumbled sentence",
+            1,
+            "Jumbled Sentence_Level_3_Test 1"
+        ],
+        [
+            "a",
+            "v",
+            "fill in the blanks",
+            2,
+            "Fill in the blanks_level_1_test_2"
+        ],
+        [
+            "a",
+            "v",
+            "sentence correction",
+            1,
+            "Sentence Correction_level_2_test 1"
+        ],
+        [
+            "a",
+            "r",
+            "rule detection",
+            1,
+            "Rule Detection Level_1_Test_1"
+        ],
+        [
+            "a",
+            "r",
+            "venn diagram",
+            3,
+            "Venn Diagram_Level_3_Test_1"
+        ]
+    ]
+}

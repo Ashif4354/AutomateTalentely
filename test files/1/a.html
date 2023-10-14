@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    <title>reCAPTCHA demo: Simple page</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("demo-form").submit();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="g-recaptcha" data-sitekey="6Ld_XI8oAAAAAF4eEvT3axrVpZnTxB61lOprH2RA" data-callback="onSubmit"
+        data-size="invisible">
+    </div>
+</body>
+
+</html>

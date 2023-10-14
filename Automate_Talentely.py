@@ -9,8 +9,7 @@ from getpass import getpass
 
 from Talentely import Talentely, AT
 
-def main():  
-    global admin
+def main():
 
     def reset_status():
         test_status = {
@@ -22,7 +21,7 @@ def main():
             dump(test_status, json_file)  
 
     with open(AT_folder_path + '/Configuration.json', 'r') as file:
-            configuration = load(file)
+        configuration = load(file)
 
     c_test_attend_status = 'ON' if configuration['attend-c-test'] else 'OFF'
 
