@@ -186,14 +186,23 @@ def main():
         count_ += 1
         print(count_)
 
+def edit_answers_json():
+    with open('Answers.json', 'r') as json_file:
+        with open('Answers2.json', 'w') as json_file2:
+            json.dump(json.load(json_file), json_file2, indent=4)
+
 if __name__ == '__main__':
-    try:
-        main()
-    except Exception as exception:
-        print(exception)
-        input()
-        input()
+    # try:
+    #     main()
+    # except Exception as exception:
+    #     print(exception)
+    #     input()
+    #     input()
+
     # check_answers()
+
+    # edit_answers_json()
+    pass
 
 
 

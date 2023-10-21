@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "ATS"
-#define MyAppVersion "9.0"
+#define MyAppVersion "9.1"
 #define MyAppPublisher "DG"
 #define MyAppURL "https://automatetalentely.netlify.app"
 #define MyAppExeName "Automate_Talentely.exe"
@@ -10,7 +10,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{17B13E40-C79C-4CA1-B100-03E0E23FFF99}
+AppId={{E2C67E14-0782-4A99-A876-0FA374694CBB}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -40,6 +40,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\output\get_update.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Answers.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Ctests.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\jsonFiles\Qtests.json"; DestDir: "{app}"; Flags: ignoreversion
@@ -52,4 +53,7 @@ Source: "D:\PROGRAMMING\PROJECTS\AutomateTalentely\text files\_README.txt"; Dest
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+
+[Run]
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 

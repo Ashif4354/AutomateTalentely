@@ -146,6 +146,13 @@ def main():
         # browser = webdriver.Edge()
         # browser.get('https://automatetalentely.netlify.app/selecttests')        
         # input()
+
+        class flask_server(Thread):
+            def run(self):
+                select_tests.select_tests_app.run()
+    
+        flask_server().start()
+
         system('cls')
         open_new('https://automatetalentely.netlify.app/selecttests')
     
@@ -176,11 +183,6 @@ def main():
         print('\nENTER VALID OPTION')
 
 if __name__ == '__main__':
-    class flask_server(Thread):
-        def run(self):
-            select_tests.select_tests_app.run()
-    
-    flask_server().start()
 
     environ['print-logs'] = 'FALSE'
 
@@ -198,6 +200,7 @@ if __name__ == '__main__':
     print('\nvisit automatetalentely.netlify.app for more..')
 
     while True:
+        # exit()
         main()
         
 

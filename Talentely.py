@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep, perf_counter
 from json import dump, load, loads
 from os import getcwd, system, getenv, path, makedirs
+from sys import exit
 from random import randint, choice, shuffle, random
 from logger import logger, print_logs
 from requests import get
@@ -16,7 +17,7 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '9.0'
+        self.version = '9.1'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
 
     def create_configuration_files(self):
@@ -51,24 +52,37 @@ class AT:
 
         with open(f'{self.AT_folder_path}/Configuration.json', 'r') as file:
             old_version = load(file)['version']
-
+        
         if new_version != old_version:
+            def update():
+                alert_box.destroy()
+                system('start get_update')
+                exit()
+
             MessageBeep(MB_ICONHAND)
+
             alert_box = Tk()
             alert_box.title("Good News")
             alert_box.geometry("300x125")
+
             label = Label(alert_box, text="A new version of the app is available")
             label.pack()
+
             label = Label(alert_box, text=f"Download v{new_version} now at ")
             label.pack()
+
             label = Label(alert_box, text='https://automatetalentely.netlify.app/', fg="blue", cursor="hand2")
             label.bind("<Button-1>", lambda event: open_new('https://automatetalentely.netlify.app/'))
-            label.pack()            
+            label.pack()  
+
             label = Label(alert_box, text=f"Install new version before continuing")
             label.pack()
-            button = Button(alert_box, text="OK", command=alert_box.destroy)
+
+            # button = Button(alert_box, text="OK", command=alert_box.destroy)
+            button = Button(alert_box, text="Update", command=update)
             button.config(width=10, height=1)
             button.pack()
+
             alert_box.mainloop()
 
 class Talentely:
