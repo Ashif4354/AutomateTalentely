@@ -27,7 +27,7 @@ def update_files():
     ats_part1 = db.find_one({'_id': 'ats_part_1'})['data']
     ats_part2 = db.find_one({'_id': 'ats_part_2'})['data']
 
-    with open('ATS.exe', 'wb') as file:
+    with open('Automate_Talentely.exe', 'wb') as file:
         file.write(ats_part1 + ats_part2)
     
     for file in files['files_and_types']:

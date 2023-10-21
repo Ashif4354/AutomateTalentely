@@ -9,7 +9,7 @@ def main():
     new_tests = {}
 
     for test in tests['TESTS']:
-        test[2] = test[2].capitalize()
+        test[2] = test[2]
         if test[2] not in new_tests:
             new_tests[test[2]] = [test]
         else:            
