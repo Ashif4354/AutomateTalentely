@@ -17,8 +17,9 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '9.1'
+        self.version = '9.2'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
+        self.logger = logger(send_ack=False)
 
     def create_configuration_files(self):
 
@@ -57,6 +58,11 @@ class AT:
             def update():
                 alert_box.destroy()
                 system('start get_update')
+
+                with open(f'{self.AT_folder_path}/Configuration.json', 'r') as file:    
+                    email = load(file)['email']
+
+                self.logger.log_update_initiate(email, old_version)
                 exit()
 
             MessageBeep(MB_ICONHAND)
