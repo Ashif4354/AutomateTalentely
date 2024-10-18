@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep, perf_counter
 from json import dump, load, loads
 from os import getcwd, system, getenv, path, makedirs
@@ -10,6 +11,7 @@ from sys import exit
 from random import randint, choice, shuffle, random
 from logger import logger, print_logs
 from requests import get
+from threading import Thread
 from tkinter import Tk, Label, Button
 from winsound import MessageBeep, MB_ICONHAND
 from webbrowser import open_new
@@ -17,8 +19,9 @@ from webbrowser import open_new
 class AT:
 
     def __init__(self):
-        self.version = '9.1'
+        self.version = '9.2'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
+        # self.logger = logger(send_ack=False)
 
     def create_configuration_files(self):
 
@@ -57,6 +60,11 @@ class AT:
             def update():
                 alert_box.destroy()
                 system('start get_update')
+
+                with open(f'{self.AT_folder_path}/Configuration.json', 'r') as file:    
+                    email = load(file)['email']
+
+                self.logger.log_update_initiate(email, old_version)
                 exit()
 
             MessageBeep(MB_ICONHAND)
@@ -89,7 +97,8 @@ class Talentely:
     def __init__(self, email = '', password = 'vidhai', answer_percentage = 100, time_percentage = 100, attend_c_test = False):        
         self.url = 'https://system.talentely.com/login'
         self.AT_folder_path = f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely"
-        self.browser  = None        
+        self.browser  = None   
+        self.browser_action = None     
         self.current_user = getenv('USERNAME')
         self.email = email
         self.password = password
@@ -104,6 +113,7 @@ class Talentely:
     def open_browser(self, maximize = True):
         self.browser = webdriver.Edge()
         print_logs('# browser opened')
+        self.browser_action = ActionChains(self.browser)
         if maximize:
             self.browser.maximize_window()
             print_logs('# browser maximized')    
@@ -161,7 +171,7 @@ class Talentely:
                 
 
             elif test[0] == 'c' and self.attend_c_test:
-                c_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/button'
+                c_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/button'
                 #WebDriverWait(self.browser, 5).until(EC.visibility_of_element_located((By.XPATH, c_button_xpath)))
                 print_logs('# c button appeared')
                 c_button = self.browser.find_element(By.XPATH, c_button_xpath)
@@ -246,15 +256,52 @@ class Talentely:
 
     def navigate_c(self, test):
         print_logs('# in navigate c')
-        basic_c_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a'
-        WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, basic_c_button_xpath)))
-        print_logs('# basic c button appeared')
-        basic_c_button = self.browser.find_element(By.XPATH, basic_c_button_xpath)
-        print_logs('# basic c button found')
+
+        self.browser.execute_script("window.scrollTo(0, 200);")
+
+        if test[1] == 'b':
+            basic_c_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a'
+            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, basic_c_button_xpath)))
+            print_logs('# basic c button appeared')
+            basic_c_button = self.browser.find_element(By.XPATH, basic_c_button_xpath)
+            print_logs('# basic c button found')   
+
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', basic_c_button)
+            basic_c_button.click()
+            print_logs('# basic c button clicked')
         
-        self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', basic_c_button)
-        basic_c_button.click()
-        print_logs('# basic c button clicked')
+        elif test[1] == 'ad':
+            advanced_c_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/a'
+            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, advanced_c_button_xpath)))
+            print_logs('# advanced c button appeared')
+            advanced_c_button = self.browser.find_element(By.XPATH, advanced_c_button_xpath)
+            print_logs('# advanced c button found')
+
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', advanced_c_button)
+            advanced_c_button.click()
+            print_logs('# advanced c button clicked')
+        
+        elif test[1] == 'd':
+            data_structures_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a'
+            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, data_structures_button_xpath)))
+            print_logs('# data structures button appeared')
+            data_structures_button = self.browser.find_element(By.XPATH, data_structures_button_xpath)
+            print_logs('# data structures button found')
+
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', data_structures_button)
+            data_structures_button.click()
+            print_logs('# data structures button clicked')
+        
+        elif test[1] == 'al':
+            algorithms_button_xpath = '//*[@id="main-content"]/div/div[2]/div[3]/div[4]/div/div[3]/a'
+            WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.XPATH, algorithms_button_xpath)))
+            print_logs('# algorithms button appeared')
+            algorithms_button = self.browser.find_element(By.XPATH, algorithms_button_xpath)
+            print_logs('# algorithms button found')
+
+            self.browser.execute_script('arguments[0].scrollIntoViewIfNeeded();', algorithms_button)
+            algorithms_button.click()
+            print_logs('# algorithms button clicked')
 
         self.find_and_do_test(test)
 
@@ -306,7 +353,8 @@ class Talentely:
         for test in self.incomplete_tests:
             print_logs('#\n\n\n')
             print_logs('# TEST processing', test)
-            sleep(10)
+            # sleep(10)
+            sleep(3)
             self.navigate_home_page(test)
 
         incomplete_tests = self.get_json('TestStatus')['INCOMPLETE']
@@ -332,12 +380,14 @@ class Talentely:
             with open(f'{self.AT_folder_path}/{file}.json', 'r') as json_file:
                 json_ = load(json_file)
         except:
-            try:
-                with open(f'{file}.json', 'r') as json_file:
-                    json_ = load(json_file)
-            except:
-                with open(f'{getcwd()}\jsonFiles\{file}.json', 'r') as json_file:
-                    json_ = load(json_file)
+            # try:
+            #     with open(f'{file}.json', 'r') as json_file:
+            #         json_ = load(json_file)
+            # except:
+            #     with open(f'{getcwd()}\jsonFiles\{file}.json', 'r') as json_file:
+            #         json_ = load(json_file)
+            with open(f'{getcwd()}\jsonFiles\{file}.json', 'r') as json_file:
+                json_ = load(json_file)
         print_logs('# found json file')
         return json_
 
@@ -350,7 +400,13 @@ class Talentely:
         elif test[1] == 'v':
             return self.get_json('Vtests')[test[2]]
         elif test[1] == 'b':
-            return self.get_json('Ctests')[test[2]]
+            return self.get_json('C_b_tests')[test[2]]
+        elif test[1] == 'ad':
+            return self.get_json('C_ad_tests')[test[2]]
+        elif test[1] == 'd':
+            return self.get_json('C_d_tests')[test[2]]
+        elif test[1] == 'al':
+            return self.get_json('C_al_tests')[test[2]]        
         else:
             pass
 
@@ -382,7 +438,7 @@ class Talentely:
         elif total_time == 0 and test[0] == 'a':
             total_time = 1200
         
-        print_logs('# total calculated timeafter adjustment: ', total_time)
+        print_logs('# total calculated time after adjustment: ', total_time)
         return (total_time, test_time)
 
     def click_test(self, test):
@@ -520,6 +576,7 @@ class Talentely:
             except:
                 print_logs('# ', test_name, ': In except coz no answers found')
                 self.end_test(test, answered = False) 
+                # self.end_test(test, answered = True) 
                 return  
             
             print_logs('# ', test_name, 'going to do test')
@@ -640,7 +697,7 @@ class Talentely:
             print_logs('# all options choosed')
         else:
             print_logs('# going into type codes')
-            self.type_codes(no_of_questions, time_for_each_question)
+            self.type_codes('c', no_of_questions, time_for_each_question, answers)
             print_logs('# all codes typed')
 
     def choose_options(self, no_of_questions, time_for_each_question, answers, correct_answers):
@@ -737,7 +794,7 @@ class Talentely:
                                 sleep(1)
                                 break
                         else:
-                            print_logs('# in else , probably answer didnt match any of the option')
+                            print_logs('# in else , probably answer didnt match the option')
                             continue
 
                     
@@ -768,23 +825,109 @@ class Talentely:
                     print_logs('# next button in except clicked')
             print_logs('# TIME taken for question {} : {}'.format(question, perf_counter() - start_time))
 
-    def type_codes(self, no_of_questions, time_for_each_question):
+    def type_codes(self, language, no_of_questions, time_for_each_question, answers):
         print_logs('# in type codes')
-        
-        for question in range(1, no_of_questions + 1):
-            print_logs('# Question number', question)
-            sleep(time_for_each_question[question - 1])
-            #typing_field_xpath = '//*[@id="editor"]/textarea'
-            #typing_field = self.browser.find_element(By.XPATH, typing_field_xpath)
-            #typing_field.click()
-            #typing_field.send_keys('#include<stdio.h>')            
 
+        class sleep_in_thread(Thread):
+            def __init__(self, time):
+                super().__init__()
+                self.time = time
+            def run(self):
+                sleep(self.time)
+        
+        try:
+            sleep(1)
+            questions_side_bar_x_button_xpath = '/html/body/div[1]/div[1]/div/main/div/div/div[3]/div[2]/div/div[2]/div/div[2]/div/div[1]/div[1]/button'
+            self.browser.find_element(By.XPATH, questions_side_bar_x_button_xpath).click()
+            sleep(.5)
+        except:
+            print_logs('# question side bar x button not clicked')
+
+        for question in range(1, no_of_questions + 1):
+            start = perf_counter()
+            print_logs('# \n')
+            print_logs('# Question number', question)
+            # sleep(time_for_each_question[question - 1])
+
+            sleeper = sleep_in_thread(time_for_each_question[question - 1])
+            # sleeper.start()
+                                  
+            
+            typing_field_xpath = '/html/body/div[1]/div[1]/div/main/div/div/div[3]/div[2]/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div/div[4]/div/textarea'
+            
+            count = 0
+            while count <= 15:
+                try:                    
+                    typing_field = self.browser.find_element(By.XPATH, typing_field_xpath)
+                    print_logs('# typing field appeared and found')
+                    # typing_field.clear()
+                    break
+                except:
+                    sleep(1)
+                finally:
+                    count += 1
+            
+            to_be_clicked_field_xpath = '/html/body/div[1]/div[1]/div/main/div/div/div[3]/div[2]/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div/div[4]/div/div[2]/div'
+            self.browser.find_element(By.XPATH, to_be_clicked_field_xpath).click()   
+            # self.browser_action.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).key_down(Keys.BACKSPACE).key_up(Keys.BACKSPACE).perform()
+            self.browser_action.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
+            print_logs('# Existing text on typing field selected field selected')
+
+            answer = answers[str(question)].strip('"')
+            print_logs('# answer: \n', answer)
+
+            indentation_level = 1
+            for line in answer.split('\n'):
+
+                line = line.strip().replace('\r', '')
+
+                if line[:2] == '//':
+                    continue
+
+                if 'scanf(' in line or 'printf(' in line:
+                    line = line.replace('""', '"')
+                
+                print(r'{}'.format(line))
+
+                if line == '{':
+                    indentation_level += 1
+                elif line == '}':
+                    indentation_level -= 1
+
+                for letter in line:                    
+                        
+                    typing_field.send_keys(letter)
+
+                    if letter in ('[', '('):
+                        sleep(.1)
+                        typing_field.send_keys(Keys.DELETE)
+                
+                if indentation_level >= 4 and line == '{':
+                    typing_field.send_keys(Keys.ENTER)
+                    sleep(.5)
+
+                typing_field.send_keys(Keys.ENTER)
+
+                count = 0
+                while count < indentation_level:
+                    typing_field.send_keys(Keys.DELETE)
+                    sleep(.1)
+                    count += 1
+
+            print_logs('# code typed')
+            sleep(1)
+            
+            # sleeper.join() 
+            print_logs('# TIME taken for question {} : {}'.format(question, perf_counter() - start))        
+
+            print_logs('# going to press next button')
             if not question == no_of_questions: 
                 try:
                     print_logs('# next button found')
                     next_button = self.browser.find_element(By.XPATH, '//*[@id="FullScreen"]/div[2]/div/div[3]/button[5]')
                     next_button.click()
                     print_logs('# next button clicked')
+                    sleep(5)
                 except:
                     print_logs('# in except, probably warning occured')
                     warning_ok_button = self.browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button')
@@ -797,6 +940,7 @@ class Talentely:
                     next_button = self.browser.find_element(By.XPATH, next_button_xpath)
                     next_button.click()
                     print_logs('# next button clicked')
+                    sleep(5)
         
     def end_test(self, test, answered):
         print_logs('# in end test')
@@ -869,3 +1013,4 @@ class Talentely:
 
         self.logger.log_test_error(len(self.get_json('TestStatus')['COMPLETED']))
         self.update_test_status(test, False)
+

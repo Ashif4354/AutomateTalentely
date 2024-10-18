@@ -15,7 +15,7 @@ def send_screenshot(webhook_url, screenshot_file):
         print('Error sending screenshot: {}'.format(response.status_code))
 
 if __name__ == '__main__':
-    webhook_url = 'https://discord.com/api/webhooks/1134892597668753448/RaoYzDR_O6P07whGZ_GiSJnT2j4p3HRgHisSaJ31TeAo5VHCstYOTBFymq6Nher1jlUI'
+    webhook_url = ''
     screenshot_file = 'a.png'
 
     send_screenshot(webhook_url, screenshot_file)

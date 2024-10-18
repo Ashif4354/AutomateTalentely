@@ -149,7 +149,7 @@ def main():
 
         class flask_server(Thread):
             def run(self):
-                select_tests.select_tests_app.run()
+                select_tests.select_tests_app.run(port=2210, debug=False)
     
         flask_server().start()
 

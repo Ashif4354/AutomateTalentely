@@ -1,0 +1,648 @@
+{
+    "2d array": [
+        [
+            "c",
+            "b",
+            "2d array",
+            1,
+            "2D_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "2d array",
+            2,
+            "2D_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "2d array",
+            3,
+            "upd_2D_Level_2"
+        ]
+    ],
+    "advanced arrays": [
+        [
+            "c",
+            "ad",
+            "advanced arrays",
+            3,
+            "upd_Adv_1D_Array_L0"
+        ],
+        [
+            "c",
+            "ad",
+            "advanced arrays",
+            4,
+            "upd_Adv_1D_Array_L1"
+        ],
+        [
+            "c",
+            "ad",
+            "advanced arrays",
+            5,
+            "upd_Adv_1D_Array_L2"
+        ]
+    ],
+    "advanced bit manipulation": [
+        [
+            "c",
+            "ad",
+            "advanced bit manipulation",
+            3,
+            "upd_adv_bit_manipulation_L0"
+        ],
+        [
+            "c",
+            "ad",
+            "advanced bit manipulation",
+            4,
+            "upd_adv_bit_manipulation_L1"
+        ],
+        [
+            "c",
+            "ad",
+            "advanced bit manipulation",
+            5,
+            "upd_adv_bit_manipulation_L2"
+        ]
+    ],
+    "advanced string": [
+        [
+            "c",
+            "ad",
+            "advanced string",
+            7,
+            "adv_strings_1"
+        ]
+    ],
+    "arrays": [
+        [
+            "c",
+            "b",
+            "arrays",
+            3,
+            "Array_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "arrays",
+            4,
+            "Array_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "arrays",
+            5,
+            "Array_Level_2"
+        ],
+        [
+            "c",
+            "b",
+            "arrays",
+            6,
+            "Array_Level_3"
+        ]
+    ],
+    "backtracking": [
+        [
+            "c",
+            "al",
+            "backtracking",
+            1,
+            "backtracking"
+        ]
+    ],
+    "basic input output and data types": [
+        [
+            "c",
+            "b",
+            "basic input output and data types",
+            4,
+            "Basic_I/P_O/P_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "basic input output and data types",
+            5,
+            "Basic_I/P_O/P_Level _1"
+        ],
+        [
+            "c",
+            "b",
+            "basic input output and data types",
+            6,
+            "Basic_I/P_O/P_Level_2"
+        ],
+        [
+            "c",
+            "b",
+            "basic input output and data types",
+            7,
+            "Basic_I/P_O/P_Level_3"
+        ]
+    ],
+    "binary search tree": [
+        [
+            "c",
+            "d",
+            "binary search tree",
+            1,
+            "upd_bst_level_0"
+        ],
+        [
+            "c",
+            "d",
+            "binary search tree",
+            2,
+            "upd_bst_level_1"
+        ]
+    ],
+    "binary tree": [
+        [
+            "c",
+            "d",
+            "binary tree",
+            1,
+            "upd_bt_level_0"
+        ]
+    ],
+    "bitwise operator": [
+        [
+            "c",
+            "b",
+            "bitwise operator",
+            1,
+            "Bitwise_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "bitwise operator",
+            2,
+            "Biwise_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "bitwise operator",
+            3,
+            "Bitwise_Level_2"
+        ]
+    ],
+    "brute force algorithm": [
+        [
+            "c",
+            "al",
+            "brute force algorithm",
+            1,
+            "Brute Force Algorithm_L0"
+        ]
+    ],
+    "circular linked list": [
+        [
+            "c",
+            "d",
+            "circular linked list",
+            14,
+            "upd_cll_level_0"
+        ]
+    ],
+    "combinatorial": [
+        [
+            "c",
+            "al",
+            "combinatorial",
+            1,
+            "combinatorial_level_0"
+        ]
+    ],
+    "conditional statements (if / while etc)": [
+        [
+            "c",
+            "b",
+            "conditional statements (if / while etc)",
+            2,
+            "Conditional_Statement_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "conditional statements (if / while etc)",
+            3,
+            "Conditional_Statement_Level_ 1"
+        ],
+        [
+            "c",
+            "b",
+            "conditional statements (if / while etc)",
+            4,
+            "Conditional_Statement_Level _2"
+        ],
+        [
+            "c",
+            "b",
+            "conditional statements (if / while etc)",
+            5,
+            "Conditional_Statement_Level _3"
+        ]
+    ],
+    "divide and conquer": [
+        [
+            "c",
+            "al",
+            "divide and conquer",
+            1,
+            "Divide_and_conquer_level_0"
+        ]
+    ],
+    "doubly linked list": [
+        [
+            "c",
+            "d",
+            "doubly linked list",
+            4,
+            "upd_dll_level_0"
+        ]
+    ],
+    "dynamic programming": [
+        [
+            "c",
+            "al",
+            "dynamic programming",
+            1,
+            "Dynamic_Level0"
+        ],
+        [
+            "c",
+            "al",
+            "dynamic programming",
+            2,
+            "Dynamic_Level1"
+        ]
+    ],
+    "functions": [
+        [
+            "c",
+            "b",
+            "functions",
+            3,
+            "Function_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "functions",
+            4,
+            "Function_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "functions",
+            5,
+            "Function_Level_2"
+        ]
+    ],
+    "greedy": [
+        [
+            "c",
+            "al",
+            "greedy",
+            1,
+            "Greedy_Level0"
+        ]
+    ],
+    "hashing": [
+        [
+            "c",
+            "al",
+            "hashing",
+            1,
+            "Hashing_level_0"
+        ]
+    ],
+    "looping": [
+        [
+            "c",
+            "b",
+            "looping",
+            2,
+            "Looping_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "looping",
+            3,
+            "Looping_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "looping",
+            4,
+            "Looping_Level_2"
+        ]
+    ],
+    "multi dimensional array": [
+        [
+            "c",
+            "ad",
+            "multi dimensional array",
+            7,
+            "adv_multi_dimensional_1"
+        ],
+        [
+            "c",
+            "ad",
+            "multi dimensional array",
+            8,
+            "adv_multi_dimensional_2"
+        ]
+    ],
+    "number based problems": [
+        [
+            "c",
+            "b",
+            "number based problems",
+            1,
+            "Number_Based_Problem_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "number based problems",
+            2,
+            "Number_Based_Problem_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "number based problems",
+            3,
+            "Number_Based_Problem_Level_2"
+        ]
+    ],
+    "number crunching": [
+        [
+            "c",
+            "b",
+            "number crunching",
+            2,
+            "Number_Crunching_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "number crunching",
+            3,
+            "Number_Crunching_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "number crunching",
+            4,
+            "Number_Crunching_Level_2"
+        ],
+        [
+            "c",
+            "b",
+            "number crunching",
+            5,
+            "Number_Crunching_Level_3"
+        ]
+    ],
+    "pattern matching": [
+        [
+            "c",
+            "al",
+            "pattern matching",
+            1,
+            "PatternMatching_Level_0"
+        ]
+    ],
+    "patterns": [
+        [
+            "c",
+            "b",
+            "patterns",
+            2,
+            "old_Pattern_Level_3"
+        ],
+        [
+            "c",
+            "b",
+            "patterns",
+            3,
+            "Pattern_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "patterns",
+            4,
+            "Pattern_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "patterns",
+            5,
+            "Pattern_Level_2"
+        ],
+        [
+            "c",
+            "b",
+            "patterns",
+            6,
+            "Pattern_Level_3"
+        ]
+    ],
+    "pointers": [
+        [
+            "c",
+            "b",
+            "pointers",
+            1,
+            "dont use"
+        ],
+        [
+            "c",
+            "b",
+            "pointers",
+            3,
+            "Pointer_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "pointers",
+            4,
+            "Pointer_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "pointers",
+            5,
+            "Pointer_Level_2"
+        ],
+        [
+            "c",
+            "b",
+            "pointers",
+            6,
+            "Pointer_Level_3"
+        ]
+    ],
+    "primality testing": [
+        [
+            "c",
+            "al",
+            "primality testing",
+            1,
+            "Primality_Testing_Level0"
+        ]
+    ],
+    "queue": [
+        [
+            "c",
+            "d",
+            "queue",
+            1,
+            "upd_queue_level_0"
+        ]
+    ],
+    "recursion": [
+        [
+            "c",
+            "ad",
+            "recursion",
+            15,
+            "Recursion_Level_0"
+        ],
+        [
+            "c",
+            "ad",
+            "recursion",
+            16,
+            "Recursion_Level_1"
+        ]
+    ],
+    "searching": [
+        [
+            "c",
+            "al",
+            "searching",
+            1,
+            "Searching_Level_0"
+        ]
+    ],
+    "singly linked list": [
+        [
+            "c",
+            "d",
+            "singly linked list",
+            46,
+            "SLL_Level_0"
+        ],
+        [
+            "c",
+            "d",
+            "singly linked list",
+            47,
+            "dont useSLL_Level_1"
+        ],
+        [
+            "c",
+            "d",
+            "singly linked list",
+            48,
+            "UPD_SLL_level 1"
+        ]
+    ],
+    "sorting": [
+        [
+            "c",
+            "al",
+            "sorting",
+            1,
+            "Sorting_Level_0"
+        ]
+    ],
+    "stack": [
+        [
+            "c",
+            "d",
+            "stack",
+            1,
+            "upd_stack_level_0"
+        ]
+    ],
+    "strings": [
+        [
+            "c",
+            "b",
+            "strings",
+            2,
+            "String_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "strings",
+            3,
+            "String_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "strings",
+            4,
+            "String_Level_2"
+        ],
+        [
+            "c",
+            "b",
+            "strings",
+            5,
+            "String_Level_3_Test_1"
+        ],
+        [
+            "c",
+            "b",
+            "strings",
+            6,
+            "String_Level_3_Test_2"
+        ]
+    ],
+    "structure": [
+        [
+            "c",
+            "b",
+            "structure",
+            2,
+            "Structure_Level_0"
+        ],
+        [
+            "c",
+            "b",
+            "structure",
+            3,
+            "Structure_Level_1"
+        ],
+        [
+            "c",
+            "b",
+            "structure",
+            4,
+            "Structure_Level_2"
+        ]
+    ]
+}

@@ -27,7 +27,7 @@ print('Login page fetched')
 sleep(2)
 
 email_field = browser.find_element(By.ID, 'username')        
-email_field.send_keys('20cs062@kcgcollege.com')
+email_field.send_keys('')
 
 password_field = browser.find_element(By.NAME, 'password')
 password_field.send_keys('vidhai')

@@ -8,7 +8,7 @@ def check_update():
     response = get('https://tcsversion.netlify.app')
     new_version = loads(response.text)['version']
 
-    with open('C:/Users/ashif/Documents/AutomateTalentely/Configuration.json', 'r') as file:
+    with open('C:/Users//Documents/AutomateTalentely/Configuration.json', 'r') as file:
         old_version = load(file)['version']
 
     if new_version != old_version:
