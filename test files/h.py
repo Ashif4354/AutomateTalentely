@@ -1,4 +1,4 @@
-discord_webhook_url = 'https://discord.com/api/webhooks/1161301420037906472/riQ63XNgFX7vjJz0z0MhgxSGA81WxaTpQuD5J3vrBrMoGHTs8pz7vgYjvVhiO6xYtke0'
+discord_webhook_url = ''
 
 def send_discord_embed(title, description, color):
     import requests

@@ -102,7 +102,7 @@ data_V = {
     'Paragraph formation' : '//*[@id="main-content"]/div/div[2]/div[3]/div[22]/div/div[3]/a'
 }
 
-data_C = {
+data_C_b = {
     'Basic Input Output and Data Types' : '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a',
     'Conditional Statements (IF / While etc)' : '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/a',
     'Looping' : '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a',
@@ -117,6 +117,41 @@ data_C = {
     'Structure' : '//*[@id="main-content"]/div/div[2]/div[3]/div[12]/div/div[3]/a',
     'Pointers' : '//*[@id="main-content"]/div/div[2]/div[3]/div[13]/div/div[3]/a',
     'Time Complexity' : '//*[@id="main-content"]/div/div[2]/div[3]/div[14]/div/div[3]/a',
+}
+
+data_C_ad = {
+    'Recursion' : '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a',
+    'Advanced Bit Manipulation' : '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/a',
+    'Advanced Arrays' : '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a',
+    'Multi Dimensional Array' : '//*[@id="main-content"]/div/div[2]/div[3]/div[4]/div/div[3]/a',
+    'Advanced String' : '//*[@id="main-content"]/div/div[2]/div[3]/div[5]/div/div[3]/a',    
+}
+
+data_C_d = {
+    'singly linked list' : '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a',
+    'doubly linked list' : '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/a',
+    'circular linked list' : '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a',
+    'stack' : '//*[@id="main-content"]/div/div[2]/div[3]/div[4]/div/div[3]/a',
+    'queue' : '//*[@id="main-content"]/div/div[2]/div[3]/div[5]/div/div[3]/a',
+    'binary tree' : '//*[@id="main-content"]/div/div[2]/div[3]/div[6]/div/div[3]/a',
+    'binary search tree' : '//*[@id="main-content"]/div/div[2]/div[3]/div[7]/div/div[3]/a'
+}
+
+data_C_al = {
+    'Sorting' : '//*[@id="main-content"]/div/div[2]/div[3]/div[1]/div/div[3]/a',
+    'Searching' : '//*[@id="main-content"]/div/div[2]/div[3]/div[2]/div/div[3]/a',
+    'Hashing' : '//*[@id="main-content"]/div/div[2]/div[3]/div[3]/div/div[3]/a',
+    'Brute Force Algorithm' : '//*[@id="main-content"]/div/div[2]/div[3]/div[4]/div/div[3]/a',
+    'Divide and Conquer' : '//*[@id="main-content"]/div/div[2]/div[3]/div[5]/div/div[3]/a',
+    'Greedy' : '//*[@id="main-content"]/div/div[2]/div[3]/div[6]/div/div[3]/a',
+    'Mathematical' : '//*[@id="main-content"]/div/div[2]/div[3]/div[7]/div/div[3]/a',
+    'Combinatorial' : '//*[@id="main-content"]/div/div[2]/div[3]/div[8]/div/div[3]/a',
+    'Primality testing' : '//*[@id="main-content"]/div/div[2]/div[3]/div[9]/div/div[3]/a',
+    'Backtracking' : '//*[@id="main-content"]/div/div[2]/div[3]/div[10]/div/div[3]/a',
+    'Pattern Matching' : '//*[@id="main-content"]/div/div[2]/div[3]/div[11]/div/div[3]/a',
+    'Graph' : '//*[@id="main-content"]/div/div[2]/div[3]/div[12]/div/div[3]/a',
+    'Dynamic Programming' : '//*[@id="main-content"]/div/div[2]/div[3]/div[13]/div/div[3]/a',
+    'Game theory' : '//*[@id="main-content"]/div/div[2]/div[3]/div[14]/div/div[3]/a',
 }
 
 data2 = {
@@ -570,12 +605,12 @@ student = {
 }
 
 new_dict = {}
-for key in data_R.keys():
+for key in data_C_al.keys():
     key2 = key.lower()
-    new_dict[key2] = data_R[key]
+    new_dict[key2] = data_C_al[key]
 
 if __name__ == '__main__':
-    with open('AllTests.json', 'w') as json_file:
-        json.dump(all_tests, json_file)
+    with open('C_al_tests.json', 'w') as json_file:
+        json.dump(new_dict, json_file)
 
 

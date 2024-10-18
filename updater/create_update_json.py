@@ -8,7 +8,7 @@ from Talentely import AT
 
 class MongoDbConfig:
     def __init__(self):
-        self.mongodburl = 'mongodb+srv://ashif:ashifmongodb@atlascluster.ahffbt1.mongodb.net/'
+        self.mongodburl = ''
 
     def connect(self):
         self.client = MongoClient(self.mongodburl)

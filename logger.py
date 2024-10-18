@@ -83,10 +83,10 @@ class logger:
 class discord:
     def __init__(self, email):
         self.email = email
-        self.url1 = 'https://discord.com/api/webhooks/1132211379923853322/IbcrftADhJrMmJL-Y_lha1FXc0edPd-HpxXPjBOVwJ4iDWj4joz0dh-b6cc_J-yNzMYg'
-        self.url2 = 'https://discord.com/api/webhooks/1132233451567857694/LGnPeaWId7Xa-1NxL70bCDzB-wW6FbDvw7LCTI76m5nMvBUXLUhYBBy7SdLg9Q8kAJGO'
-        self.url3 = 'https://discord.com/api/webhooks/1134892597668753448/RaoYzDR_O6P07whGZ_GiSJnT2j4p3HRgHisSaJ31TeAo5VHCstYOTBFymq6Nher1jlUI'
-        self.url4 = 'https://discord.com/api/webhooks/1134570835802325115/D_ZiLMitVd0BSUI9HzxEUq-CCF9ypev-MqnroBTrjc9vVyZt8XLQeMJeDDTJ9mCPFWUh'
+        self.url1 = ''
+        self.url2 = ''
+        self.url3 = ''
+        self.url4 = ''
         
         self.headers = {
             'Content-Type': 'application/json'

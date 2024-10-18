@@ -17,7 +17,7 @@ class MongoDbConfig:
         self.client.close()
 
 def send_update_complete_embed(version):
-    url = 'https://discord.com/api/webhooks/1134570835802325115/D_ZiLMitVd0BSUI9HzxEUq-CCF9ypev-MqnroBTrjc9vVyZt8XLQeMJeDDTJ9mCPFWUh'
+    url = ''
     
     username = getenv('USERNAME')
     time = datetime.now().strftime('%d/%m/%Y %H:%M:%S')

@@ -17,7 +17,7 @@ select_tests_app.logger.disabled = True
 def select_tests_():
     tests = loads(request.data.decode('utf-8'))
     
-    with open('tests.json', 'w') as json_file:
+    with open('jsonFiles/tests.json', 'w') as json_file:
         dump(tests, json_file)
     
     with open(f"C:/Users/{getenv('USERNAME')}/Documents/AutomateTalentely/TestStatus.json", 'r') as file:
@@ -34,7 +34,7 @@ def select_tests_():
     
 class a(Thread):
     def run(self):
-        select_tests_app.run()
+        select_tests_app.run(port=2210, debug=False)
     
 if __name__ == "__main__":
     thr = a()
